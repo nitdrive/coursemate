@@ -1,0 +1,380 @@
+<ion-view view-title="Register">
+        <ion-content class="padding">
+	 <form name="myform" ng-submit="Register" novalidate>
+          
+           <div class="card" id="app-user-registration-personal" ng-hide="userRegistrationS1">
+	   
+	      <div class="item item-divider">Registration - Personal Details</div>
+	      <div class="list">
+               <ng-form name="f1">
+			  <label class="item item-input item-stacked-label">
+			    <span class="input-label">First Name</span>
+			    <input type="text" placeholder="John" ng-model="firstName">
+			  </label>
+			  <label class="item item-input item-stacked-label">
+			    <span class="input-label">Middle Name</span>
+			    <input type="text" placeholder="Mac" ng-model="middleName">
+			  </label>
+			  <label class="item item-input item-stacked-label">
+			    <span class="input-label">Last Name</span>
+			    <input type="text" placeholder="Suhr" ng-model="lastName">
+			  </label>
+			 
+			 <label class="item item-input item-stacked-label">
+			    <span class="input-label">Date of Birth</span>
+			    <input type="text" placeholder="04/20/1991" ng-model="dob">
+			 </label>
+			 
+			  <div class="item item-divider item-light">
+		   		<button class="button button-block button-positive" ng-click="loadNextRegisterScreen()">Next</button>
+			  </div>
+                 </ng-form>
+	         </div>
+            
+           </div>
+<!--block-----------------------------------------------------------------------------------ssssss---------------------------------------------------------------------->
+     <div class="card" id="app-user-registration-address" ng-hide="userRegistrationS2">
+     <div class="item item-divider">Registration - Contact Details</div>
+      
+        <div class="list">
+	<ng-form name="f2">
+		<label class="item item-input item-stacked-label">
+			    <span class="input-label">Email</span>
+			    <input type="email" placeholder="john@xyz.com" ng-model="email">
+		</label>
+		<label class="item item-input item-stacked-label">
+			    <span class="input-label">Phone Number</span>
+			    <input type="text" placeholder="504-881-5455" ng-model="phno">
+		 </label>
+		<label class="item item-input item-stacked-label">
+		 <span class="input-label">Mailing Address</span>    	 
+		 <textarea placeholder="1234 xyz street" ng-model="maddress"></textarea>
+		 </label>
+		 <label class="item item-input item-stacked-label">
+		    <span class="input-label">District</span>
+		    <input type="text" placeholder="Chitoor" ng-model="district">
+		  </label>
+		<label class="item item-input item-stacked-label">
+		    <span class="input-label">City</span>
+		    <input type="text" placeholder="Hyderabad" ng-model="city">
+		 </label>
+		<label class="item item-input item-stacked-label">
+		    <span class="input-label">State</span>
+		    <input type="text" placeholder="Andhra Pradesh" ng-model="state">
+		 </label>
+		<label class="item item-input item-stacked-label">
+		    <span class="input-label">Country</span>
+		    <input type="text" placeholder="India" disabled>
+		 </label>
+		<div class="item item-divider item-light">
+	   		<button class="button button-block button-positive" ng-click="loadNextRegisterScreen()">Next</button>
+		 </div>
+          </ng-form>
+	  </div>
+      </div>
+	
+<!--block-----------------------------------------------------------------------------------ssssss---------------------------------------------------------------------->
+    
+     <div class="card" id="app-user-registration-password" ng-hide="userRegistrationS3">
+       <div class="item item-divider">Registration - Create Username and Password</div>
+       <div class="list">
+        <ng-form name="f3">
+		<label class="item item-input item-stacked-label">
+				    <span class="input-label">Enter your Email</span>
+				    <input type="email" placeholder="Enter a valid email for username" id="uname" ng-model="uname" >
+		</label>
+		<label class="item item-input item-stacked-label">
+				    <span class="input-label">Enter a Password</span>
+				    <input type="password" placeholder="Enter your Password" id="password" ng-model="pass" >
+		</label>
+		<label class="item item-input item-stacked-label">
+				    <span class="input-label">Re Enter the Password</span>
+				    <input type="password" placeholder="Re Enter your Password" id="cpassword" ng-model="cpass" >
+		</label>
+		<div class="item item-divider item-light">
+	   		<button class="button button-block button-positive" ng-click="loadNextRegisterScreen()">Next</button>
+		 </div>
+         </ng-form>
+	 </div>
+     </div>
+
+    <div class="card" id="display" ng-show="display" ng-bind-html="displayMessage" ng-style="displayPane"></div>
+	
+   <div class="card" id="app-user-registration-enrollment" ng-hide="userRegistrationS4">
+     	<div class="item item-divider">Registration - Enrollment Information</div>
+		      <div class="list">
+                       <ng-form name="f4">
+			<label class="item item-input item-stacked-label">
+			    <span class="input-label">Intended Semester</span>
+				       <select  ng-model="semesterIntended">
+				            <option selected>Fall 2015</option>
+				            <option>Spring 2016</option>
+				            <option>Summer 2016</option>
+				       </select>
+			 </label>
+			 <label class="item item-input item-stacked-label">
+			   <span class="input-label">Intended Major</span>
+			  	<select class="form-control" ng-model="majorIntended">
+				            <option value="Undeclared">Undeclared</option><option value="Graduate Certificate">Graduate Certificate</option><option value="Accounting">Accounting</option><option value="Aerospace Engineering">Aerospace Engineering</option><option value="Agricultural Extension Education">Agricultural Extension Education</option><option value="Agricultural Biology">Agricultural Biology</option><option value="Agricultural Economics">Agricultural Economics</option><option value="Agriculture">Agriculture</option><option value="Animal Science">Animal Science</option><option value="Anthropology">Anthropology</option><option value="Applied Statistics">Applied Statistics</option><option value="Art">Art</option><option value="Astronomy">Astronomy</option><option value="Bioinformatics &amp; Computational Biology">Bioinformatics &amp; Computational Biology</option><option value="Biology">Biology</option><option value="Business Administration">Business Administration</option><option value="Chemical Engineering">Chemical Engineering</option><option value="Chemistry">Chemistry</option><option value="Civil Engineering">Civil Engineering</option><option value="Communication Disorders">Communication Disorders</option><option value="Communication Studies">Communication Studies</option><option value="Computer Science">Computer Science</option><option value="Counseling and Guidance">Counseling and Guidance</option><option value="Counseling Psychology">Counseling Psychology</option><option value="Creative Writing">Creative Writing</option><option value="Criminal Justice">Criminal Justice</option><option value="Curriculum and Instruction">Curriculum and Instruction</option><option value="Economic Development">Economic Development</option><option value="Economics">Economics</option><option value="Education">Education</option><option value="Educational Administration">Educational Administration</option><option value="Electrical Engineering">Electrical Engineering</option><option value="Engineering">Engineering</option><option value="English">English</option><option value="Environmental Engineering">Environmental Engineering</option><option value="Family and Consumer Sciences">Family and Consumer Sciences</option><option value="Financial Mathematics">Financial Mathematics</option><option value="Fine Arts">Fine Arts</option><option value="Geography">Geography</option><option value="Geology">Geology</option><option value="Government">Government</option><option value="History">History</option><option value="Horticulture">Horticulture</option><option value="Industrial Engineering">Industrial Engineering</option><option value="Mathematics">Mathematics</option><option value="Mechanical Engineering">Mechanical Engineering</option><option value="Molecular Biology">Molecular Biology</option><option value="Music">Music</option><option value="Nursing">Nursing</option><option value="Nursing Practice">Nursing Practice</option><option value="Nursing Science">Nursing Science</option><option value="Physics">Physics</option><option value="Plant and Environmental Science">Plant and Environmental Science</option><option value="Psychology">Psychology</option><option value="Public Administration">Public Administration</option><option value="Public Health">Public Health</option><option value="Range Science">Range Science</option><option value="Reading">Reading</option><option value="Rhetoric and Professional Communication">Rhetoric and Professional Communication</option><option value="School Psychology">School Psychology</option><option value="Social Work">Social Work</option><option value="Sociology">Sociology</option><option value="Spanish">Spanish</option><option value="Special Education">Special Education</option><option value="Wildlife Science">Wildlife Science</option><option value="Water Science and Management">Water Science and Management</option>
+				</select>
+			</label>
+		      <label class="item item-input item-stacked-label">
+		       <span class="input-label">Degree Expected</span>
+			<select class="form-control" ng-model="degreeExpected">
+				            <option>Master of Science (MS)</option>
+				            <option>Doctor of Philosophy (Ph.D)</option>
+				       </select>
+		     </label>
+			<div class="item item-divider item-light">
+		   		<button class="button button-block button-positive" ng-click="loadNextRegisterScreen()">Next</button>
+			 </div>
+               </ng-form>
+		</div>
+    </div>
+	
+ 
+	
+<div class="card" id="app-user-registration-previouseducation" ng-hide="userRegistrationS5">
+     <div class="item item-divider">Registration - Previous Education and Institution Details</div>
+		      <div class="list">
+                      <ng-form name="f5">
+			<label class="item item-input item-stacked-label">
+			   <span class="input-label">Undergratuate Major</span>
+			  	<select class="form-control" ng-model="undergradMajor">
+				            <option value="Undeclared">Undeclared</option><option value="Graduate Certificate">Graduate Certificate</option><option value="Accounting">Accounting</option><option value="Aerospace Engineering">Aerospace Engineering</option><option value="Agricultural Extension Education">Agricultural Extension Education</option><option value="Agricultural Biology">Agricultural Biology</option><option value="Agricultural Economics">Agricultural Economics</option><option value="Agriculture">Agriculture</option><option value="Animal Science">Animal Science</option><option value="Anthropology">Anthropology</option><option value="Applied Statistics">Applied Statistics</option><option value="Art">Art</option><option value="Astronomy">Astronomy</option><option value="Bioinformatics &amp; Computational Biology">Bioinformatics &amp; Computational Biology</option><option value="Biology">Biology</option><option value="Business Administration">Business Administration</option><option value="Chemical Engineering">Chemical Engineering</option><option value="Chemistry">Chemistry</option><option value="Civil Engineering">Civil Engineering</option><option value="Communication Disorders">Communication Disorders</option><option value="Communication Studies">Communication Studies</option><option value="Computer Science">Computer Science</option><option value="Counseling and Guidance">Counseling and Guidance</option><option value="Counseling Psychology">Counseling Psychology</option><option value="Creative Writing">Creative Writing</option><option value="Criminal Justice">Criminal Justice</option><option value="Curriculum and Instruction">Curriculum and Instruction</option><option value="Economic Development">Economic Development</option><option value="Economics">Economics</option><option value="Education">Education</option><option value="Educational Administration">Educational Administration</option><option value="Electrical Engineering">Electrical Engineering</option><option value="Engineering">Engineering</option><option value="English">English</option><option value="Environmental Engineering">Environmental Engineering</option><option value="Family and Consumer Sciences">Family and Consumer Sciences</option><option value="Financial Mathematics">Financial Mathematics</option><option value="Fine Arts">Fine Arts</option><option value="Geography">Geography</option><option value="Geology">Geology</option><option value="Government">Government</option><option value="History">History</option><option value="Horticulture">Horticulture</option><option value="Industrial Engineering">Industrial Engineering</option><option value="Mathematics">Mathematics</option><option value="Mechanical Engineering">Mechanical Engineering</option><option value="Molecular Biology">Molecular Biology</option><option value="Music">Music</option><option value="Nursing">Nursing</option><option value="Nursing Practice">Nursing Practice</option><option value="Nursing Science">Nursing Science</option><option value="Physics">Physics</option><option value="Plant and Environmental Science">Plant and Environmental Science</option><option value="Psychology">Psychology</option><option value="Public Administration">Public Administration</option><option value="Public Health">Public Health</option><option value="Range Science">Range Science</option><option value="Reading">Reading</option><option value="Rhetoric and Professional Communication">Rhetoric and Professional Communication</option><option value="School Psychology">School Psychology</option><option value="Social Work">Social Work</option><option value="Sociology">Sociology</option><option value="Spanish">Spanish</option><option value="Special Education">Special Education</option><option value="Wildlife Science">Wildlife Science</option><option value="Water Science and Management">Water Science and Management</option>
+				</select>
+			</label>
+			<label class="item item-input item-stacked-label">
+			    <span class="input-label">Undergraduate GPA</span>
+			    <input type="text" placeholder="7.5" ng-model="undergradGPA">
+			 </label>
+		       <label class="item item-input item-stacked-label">
+			    <span class="input-label">Undergraduate College</span>
+			    <input type="text" placeholder="JNTU Hyderabad" ng-model="undergradCollege">
+			 </label>
+			<label class="item item-input item-stacked-label">
+			    <span class="input-label">Undergraduate College City</span>
+			    <input type="text" placeholder="Hyderabad" ng-model="undergradCollegeCity">
+			 </label>
+			<label class="item item-input item-stacked-label">
+			    <span class="input-label">Undergraduate College State</span>
+			    <input type="text" placeholder="Andhra Pradesh" ng-model="undergradCollegeState">
+			 </label>
+			<label class="item item-input item-stacked-label">
+			    <span class="input-label">Undergraduate College Country</span>
+			    <input type="text" placeholder="India" ng-model="undergradCollegeCountry">
+			 </label>
+			<div class="item item-divider item-light">
+		   		<button class="button button-block button-positive" ng-click="loadNextRegisterScreen()">Next</button>
+			 </div>
+              </ng-form>
+	</div>
+    </div>
+	
+  
+   <div class="card" id="app-user-registration-testscores" ng-hide="userRegistrationS6">
+     	<div class="item item-divider">Registration - Test Scores</div>
+	      <div class="list">
+		<ng-form name="f6">
+			<label class="item item-input item-stacked-label">
+			    <div class="row">
+				<div class="col">
+				    <span class="input-label" style="font-weight: bold;">GRE Total score</span>
+				    <input type="text" placeholder="315" ng-model="greScore">
+				</div>
+			    </div>
+			</label> 
+			<label class="item item-input item-stacked-label">
+			       <div class="row">
+				  <div class="col">
+				     <span class="input-label">GRE Quant score</span>
+				     <input type="text" placeholder="160" ng-model="greQuantScore">
+				  </div>
+				  <div class="col">
+				     <span class="input-label">GRE Verbal score</span>
+				     <input type="text" placeholder="155" ng-model="greVerbalScore">
+				  </div>
+				  <div class="col">
+				     <span class="input-label">GRE Quant score</span>
+				     <input type="text" placeholder="3.5" ng-model="greAWAScore">
+				  </div>
+			      </div>
+				  
+			</label>
+			<label class="item item-input item-stacked-label">
+			   <div class="row">
+				<div class="col">
+				    <span class="input-label" style="font-weight: bold;">TOEFL Total score</span>
+				    <input type="text" placeholder="100" ng-model="toeflScore">
+				</div>
+			    </div>
+			</label> 
+			<label class="item item-input item-stacked-label">
+			       <div class="row">
+				  <div class="col">
+				     <span class="input-label">Listening score</span>
+				     <input type="text" placeholder="22" ng-model="toeflListeningScore">
+				  </div>
+				  <div class="col">
+				     <span class="input-label">Reading score</span>
+				     <input type="text" placeholder="23" ng-model="toeflReadingScore">
+				  </div>
+				  <div class="col">
+				     <span class="input-label">Writing score</span>
+				     <input type="text" placeholder="27" ng-model="toeflWritingScore">
+				  </div>
+				  <div class="col">
+				     <span class="input-label">Speaking score</span>
+				     <input type="text" placeholder="28" ng-model="toeflSpeakingScore">
+				  </div>
+			      </div>
+			 </label>
+			<label class="item item-input item-stacked-label">
+			    <div class="row">
+				<div class="col">
+				    <span class="input-label" style="font-weight: bold;">ILETS score</span>
+				    <input type="text" placeholder="7.5" ng-model="iletsScore">
+				</div>
+			    </div>
+			</label> 
+			<label class="item item-input item-stacked-label">
+			       <div class="row">
+				  <div class="col">
+				     <span class="input-label">Listening score</span>
+				     <input type="text" placeholder="7" ng-model="iletsListeningScore">
+				  </div>
+				  <div class="col">
+				     <span class="input-label">Reading score</span>
+				     <input type="text" placeholder="7" ng-model="iletsReadingScore">
+				  </div>
+				   <div class="col">
+				     <span class="input-label">Writing score</span>
+				     <input type="text" placeholder="7.5" ng-model="iletsWritingScore">
+				  </div>
+				  <div class="col">
+				     <span class="input-label">Speaking  score</span>
+				     <input type="text" placeholder="7.5" ng-model="iletsSpeakingScore">
+				  </div>
+			      </div>
+			 </label>
+			 <div class="item item-divider item-light">
+		   		<button type="submit" class="button button-block button-positive">Finish</button>
+			 </div>
+                   </ng-form>
+		  </div>
+     </div>
+    
+</form>
+   <!--<div class="card" id="app-user-registration-extraachievements" ng-hide="userRegistrationS7">
+     <div class="item item-divider">Registration - Extra Achievements</div>
+      <div class="list">
+	
+	<div class="item item-divider item-light">
+   		<button class="button button-block button-positive" ng-click="loadNextRegisterScreen()">Next</button>
+	 </div>
+	</div>
+    </div>
+
+   <div class="card" id="app-user-registration-finish" ng-hide="userRegistrationS8">
+     <div class="item item-divider">Registration - Accept Terms and Finish</div>
+      <div class="list">
+	
+	<div class="item item-divider item-light">
+   		<button class="button button-block button-positive" ng-click="loadNextRegisterScreen()">Finish</button>
+	 </div>
+	</div>
+    </div>-->
+	
+   <!--<div class="card" id="app-user-registration-enrollment" ng-hide="userRegistrationS7">
+     <div class="item item-divider">Registration Successful</div>
+	    <div class="item item-text-wrap">
+	      You have successfully registered for graduate degree program {{ degreeExpected +"in"+ majorIntended }} for {{ semesterIntended }} at the University of New Orleans <a href="#/user/login">Click here</a> to Login
+	      
+	    </div>
+   </div>-->
+
+        </ion-content>
+</ion-view> 
+               
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		<!--<div class="card" id="app-user-register">
+		  <div class="list">
+			 <div class="item item-divider">
+	   			 User Registration
+	  	         </div>
+                         <form ng-submit="Register()">
+			  <label class="item item-input item-stacked-label">
+			    <span class="input-label">Username</span>
+			    <input type="text" placeholder="Enter your Username" id="username" ng-model="username" required="required">
+			  </label>
+			  <label class="item item-input item-stacked-label">
+			    <span class="input-label">Password</span>
+			    <input type="password" placeholder="Enter your Password" id="password" ng-model="password" required="required">
+			  </label>
+                          <label class="item item-input item-stacked-label">
+			    <span class="input-    </ion-content>
+</ion-view> label">GRE Score</span>
+			    <input type="text" placeholder="Enter your GRE Score" id="username" ng-model="greScore" required="required">
+			  </label>
+                          <label class="item item-input item-stacked-label">
+			    <span class="input-label">TOEFL Score</span>
+			    <input type="text" placeholder="Enter your TOEFL Score" id="username" ng-model="toeflScore" required="required">
+			  </label>
+                          <label class="item item-input item-stacked-label">
+			    <span class="input-label">Undergraduate GPA</span>
+			    <input type="text" placeholder="Enter your Undergraduate GPA" id="username" ng-model="undergradGPA" required="required">
+			  </label>
+			<div class="item item-divider item-light">
+	   			<button  type="submit" class="button button-block button-positive">Register</button>
+	  	         </div>
+		        </form>
+		         <!--<div class="item item-divider item-light">
+                                
+	   			<button  type="button" class="button button-block button-positive" ng-click="Register()">Register</button>
+	  	         </div>
+		        
+		  </div>
+	
+		</div>-->
+
+

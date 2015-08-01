@@ -1,0 +1,40 @@
+<ion-view view-title="SchoolMate">
+        <ion-content class="padding">
+	<div class="card" id="app-user-login">
+	  <div class="list">
+		 <div class="item item-divider">
+   			 Admin Dashboard
+  	         </div>
+                
+                 <div class="list">
+                    <div class="list">
+   			    
+  	            </div>
+                  <table>
+                          <tr>
+                             <th>Name</th>
+			     <th>GRE Score</th>
+			     <th>TOEFL Score</th>
+			     <th>ILETS Score</th>
+                          </tr>
+			  <tr ng-repeat="user in userlist ">
+			    <td>{{user.firstName}}</td>
+			    <td>{{user.greScore}}</td>
+			    <td>{{user.toeflScore}}</td>
+			    <td>{{user.iletsScore}}</td>
+			  </tr>
+			
+			 <tr>
+			    <td ng-if="userlist.length == 0"><strong>No results found...</strong></td>
+			 </tr>
+                  </table>
+  		
+	
+
+                 </div>
+               
+	  </div>
+	
+	</div>
+ </ion-content>
+</ion-view> 

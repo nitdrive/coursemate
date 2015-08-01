@@ -1,0 +1,29 @@
+<ion-view view-title="Register">
+        <ion-content class="padding">
+         <div class="card" id="app-user-registration-password" ng-hide="userRegistrationS3">
+         <div class="item item-divider">Registration - Create Username and Password</div>
+         	<div class="list">
+        
+			<label class="item item-input item-stacked-label">
+					    <span class="input-label">Enter your Email</span>
+					    <input type="email" placeholder="Enter a valid email for username" id="uname" ng-model="user.uname" >
+			</label>
+			<label class="item item-input item-stacked-label">
+					    <span class="input-label">Enter a Password</span>
+					    <input type="password" placeholder="Enter your Password" id="password" ng-model="pass" >
+			</label>
+			<label class="item item-input item-stacked-label">
+					    <span class="input-label">Re Enter the Password</span>
+					    <input type="password" placeholder="Re Enter your Password" id="cpassword" ng-model="user.cpass" >
+			</label>
+                         <input type="hidden" ng-model="user.pageNumber" value="3"/>
+			<div class="item item-divider item-light">
+		   		<button class="button button-block button-positive" ng-click="saveandforward(user)">{{ navButton }}</button>
+				<button class="button button-block button-positive" ng-click="previous()">Prev</button>
+			 </div>
+         
+	        </div>
+               <div class="card" id="display" ng-show="display" ng-bind-html="displayMessage" ng-style="displayPane"></div>
+         </div>
+	  </ion-content>
+</ion-view> 

@@ -1,0 +1,38 @@
+<ion-view view-title="Register">
+        <ion-content class="padding">
+        <div class="card" id="display" ng-show="display" ng-bind-html="displayMessage" ng-style="displayPane"></div>
+	
+   <div class="card" id="app-user-registration-enrollment" ng-hide="userRegistrationS4" >
+     	<div class="item item-divider">Registration - Enrollment Information</div>
+		      <div class="list">
+                       
+			<label class="item item-input item-stacked-label">
+			    <span class="input-label">Intended Semester</span>
+				       <select  ng-model="user.semesterIntended">
+				            <option selected>Fall 2015</option>
+				            <option>Spring 2016</option>
+				            <option>Summer 2016</option>
+				       </select>
+			 </label>
+			 <label class="item item-input item-stacked-label">
+			   <span class="input-label">Intended Major</span>
+			  	<select class="form-control" ng-model="user.majorIntended">
+				            <option value="Undeclared">Undeclared</option><option value="Graduate Certificate">Graduate Certificate</option><option value="Accounting">Accounting</option><option value="Aerospace Engineering">Aerospace Engineering</option><option value="Agricultural Extension Education">Agricultural Extension Education</option><option value="Agricultural Biology">Agricultural Biology</option><option value="Agricultural Economics">Agricultural Economics</option><option value="Agriculture">Agriculture</option><option value="Animal Science">Animal Science</option><option value="Anthropology">Anthropology</option><option value="Applied Statistics">Applied Statistics</option><option value="Art">Art</option><option value="Astronomy">Astronomy</option><option value="Bioinformatics &amp; Computational Biology">Bioinformatics &amp; Computational Biology</option><option value="Biology">Biology</option><option value="Business Administration">Business Administration</option><option value="Chemical Engineering">Chemical Engineering</option><option value="Chemistry">Chemistry</option><option value="Civil Engineering">Civil Engineering</option><option value="Communication Disorders">Communication Disorders</option><option value="Communication Studies">Communication Studies</option><option value="Computer Science">Computer Science</option><option value="Counseling and Guidance">Counseling and Guidance</option><option value="Counseling Psychology">Counseling Psychology</option><option value="Creative Writing">Creative Writing</option><option value="Criminal Justice">Criminal Justice</option><option value="Curriculum and Instruction">Curriculum and Instruction</option><option value="Economic Development">Economic Development</option><option value="Economics">Economics</option><option value="Education">Education</option><option value="Educational Administration">Educational Administration</option><option value="Electrical Engineering">Electrical Engineering</option><option value="Engineering">Engineering</option><option value="English">English</option><option value="Environmental Engineering">Environmental Engineering</option><option value="Family and Consumer Sciences">Family and Consumer Sciences</option><option value="Financial Mathematics">Financial Mathematics</option><option value="Fine Arts">Fine Arts</option><option value="Geography">Geography</option><option value="Geology">Geology</option><option value="Government">Government</option><option value="History">History</option><option value="Horticulture">Horticulture</option><option value="Industrial Engineering">Industrial Engineering</option><option value="Mathematics">Mathematics</option><option value="Mechanical Engineering">Mechanical Engineering</option><option value="Molecular Biology">Molecular Biology</option><option value="Music">Music</option><option value="Nursing">Nursing</option><option value="Nursing Practice">Nursing Practice</option><option value="Nursing Science">Nursing Science</option><option value="Physics">Physics</option><option value="Plant and Environmental Science">Plant and Environmental Science</option><option value="Psychology">Psychology</option><option value="Public Administration">Public Administration</option><option value="Public Health">Public Health</option><option value="Range Science">Range Science</option><option value="Reading">Reading</option><option value="Rhetoric and Professional Communication">Rhetoric and Professional Communication</option><option value="School Psychology">School Psychology</option><option value="Social Work">Social Work</option><option value="Sociology">Sociology</option><option value="Spanish">Spanish</option><option value="Special Education">Special Education</option><option value="Wildlife Science">Wildlife Science</option><option value="Water Science and Management">Water Science and Management</option>
+				</select>
+			</label>
+		      <label class="item item-input item-stacked-label">
+		       <span class="input-label">Degree Expected</span>
+			<select class="form-control" ng-model="user.degreeExpected">
+				            <option>Master of Science (MS)</option>
+				            <option>Doctor of Philosophy (Ph.D)</option>
+				       </select>
+		     </label>
+		     <input type="hidden" ng-model="user.pageNumber" value="4"/>
+			<div class="item item-divider item-light">
+		   		<button class="button button-block button-positive" ng-click="{{ changeSavetoUpdate }}">{{  navButton   }}</button>
+			 </div>
+               
+		</div>
+    </div>
+</ion-content>
+</ion-view> 

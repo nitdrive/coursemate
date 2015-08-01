@@ -1,0 +1,70 @@
+ 
+        
+        
+
+<ion-view view-title="SchoolMate">
+       
+        
+        
+
+        <ion-content class="padding" has-header="true">
+         
+        
+         
+
+       
+        <!--<div class="bar bar-header bar-stable">
+	  <button class="button button-icon icon ion-navicon" ng-click="showMenu()"></button>
+	  <div class="h1 title">Dashboard</div>
+	  <button class="button button-clear button-positive" ng-click="showRightMenu()">Logout</button>
+        </div>-->
+            
+            <div class="padding-top">
+            
+            <h5 class="title">Total registrations for Fall 2015 are <strong>{{ userlist.length }}</strong> </h5>
+	    <h5 class="title">Average GRE Score is <strong>{{ avg | number:3 }}</strong></h5>
+                 
+                 
+
+           </div>
+	<!--<div class="card" id="app-user-login">-->
+		<div id="chart-div"></div>
+	  <h5 class="title">Average Undergraduate GPA is <strong>{{ undergradGPA | number:3 }}</strong></h5>
+		<div id="chart-div2"></div>
+        <!--</div>   -->
+	 <!-- <div class="list">
+		 
+  	               
+                 <div ng-view onload="onViewLoad()"></div>
+                 
+
+                   
+                   
+                 <!--<table>
+                          <tr>
+                             <th>Name</th>
+			     <th>GRE Score</th>
+			     <th>TOEFL Score</th>
+			     <th>ILETS Score</th>
+                          </tr>
+			  <tr ng-repeat="user in userlist ">
+			    <td>{{user.firstName}}</td>
+			    <td>{{user.greScore}}</td>
+			    <td>{{user.toeflScore}}</td>
+			    <td>{{user.iletsScore}}</td>
+			  </tr>
+			
+			 <tr>
+			    <td ng-if="userlist.length == 0"><strong>No results found...</strong></td>
+			 </tr>
+                  </table>
+  		
+	
+
+                
+               
+	  </div>
+	
+	</div>-->
+ </ion-content>
+</ion-view> 

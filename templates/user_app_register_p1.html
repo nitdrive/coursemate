@@ -1,0 +1,38 @@
+<ion-view view-title="Register">
+        <ion-content class="padding">
+           
+          
+           <div class="card" id="app-user-registration-personal" ng-hide="userRegistrationS1">
+	   
+	      <div class="item item-divider">Registration - Personal Details</div>
+	      <div class="list">
+               <form ng-submit="Register">
+			  <label class="item item-input item-stacked-label">
+			    <span class="input-label">First Name</span>
+			    <input type="text" placeholder="John" ng-model="user.firstName">
+			  </label>
+			  <label class="item item-input item-stacked-label">
+			    <span class="input-label">Middle Name</span>
+			    <input type="text" placeholder="Mac" ng-model="user.middleName">
+			  </label>
+			  <label class="item item-input item-stacked-label">
+			    <span class="input-label">Last Name</span>
+			    <input type="text" placeholder="Suhr" ng-model="user.lastName">
+			  </label>
+			 
+			 <label class="item item-input item-stacked-label">
+			    <span class="input-label">Date of Birth</span>
+			    <input type="text" placeholder="04/20/1991" ng-model="user.dob">
+			 </label>
+			 <input type="hidden" ng-model="user.pageNumber" value="1"/>
+			  <div class="item item-divider item-light">
+		   		<button class="button button-block button-positive" ng-click="{{ saveandforward }}">{{ navButton }}</button>
+				<button class="button button-block button-positive" ng-click="previous()">Prev</button>
+			  </div>
+                </form>
+	      </div>
+             
+           </div>
+         </ion-content>
+</ion-view> 
+               

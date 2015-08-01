@@ -1,0 +1,96 @@
+<ion-view view-title="Register">
+        <ion-content class="padding">
+	  <div class="card" id="app-user-registration-testscores" ng-hide="userRegistrationS6">
+     	<div class="item item-divider">Registration - Test Scores</div>
+	      <div class="list">
+		
+			<label class="item item-input item-stacked-label">
+			    <div class="row">
+				<div class="col">
+				    <span class="input-label" style="font-weight: bold;">GRE Total score</span>
+				    <input type="text" placeholder="315" ng-model="user.greScore">
+				</div>
+			    </div>
+			</label> 
+			<label class="item item-input item-stacked-label">
+			       <div class="row">
+				  <div class="col">
+				     <span class="input-label">GRE Quant score</span>
+				     <input type="text" placeholder="160" ng-model="user.greQuantScore">
+				  </div>
+				  <div class="col">
+				     <span class="input-label">GRE Verbal score</span>
+				     <input type="text" placeholder="155" ng-model="user.greVerbalScore">
+				  </div>
+				  <div class="col">
+				     <span class="input-label">GRE Quant score</span>
+				     <input type="text" placeholder="3.5" ng-model="user.greAWAScore">
+				  </div>
+			      </div>
+				  
+			</label>
+			<label class="item item-input item-stacked-label">
+			   <div class="row">
+				<div class="col">
+				    <span class="input-label" style="font-weight: bold;">TOEFL Total score</span>
+				    <input type="text" placeholder="100" ng-model="user.toeflScore">
+				</div>
+			    </div>
+			</label> 
+			<label class="item item-input item-stacked-label">
+			       <div class="row">
+				  <div class="col">
+				     <span class="input-label">Listening score</span>
+				     <input type="text" placeholder="22" ng-model="user.toeflListeningScore">
+				  </div>
+				  <div class="col">
+				     <span class="input-label">Reading score</span>
+				     <input type="text" placeholder="23" ng-model="user.toeflReadingScore">
+				  </div>
+				  <div class="col">
+				     <span class="input-label">Writing score</span>
+				     <input type="text" placeholder="27" ng-model="user.toeflWritingScore">
+				  </div>
+				  <div class="col">
+				     <span class="input-label">Speaking score</span>
+				     <input type="text" placeholder="28" ng-model="user.toeflSpeakingScore">
+				  </div>
+			      </div>
+			 </label>
+			<label class="item item-input item-stacked-label">
+			    <div class="row">
+				<div class="col">
+				    <span class="input-label" style="font-weight: bold;">ILETS score</span>
+				    <input type="text" placeholder="7.5" ng-model="user.iletsScore">
+				</div>
+			    </div>
+			</label> 
+			<label class="item item-input item-stacked-label">
+			       <div class="row">
+				  <div class="col">
+				     <span class="input-label">Listening score</span>
+				     <input type="text" placeholder="7" ng-model="user.iletsListeningScore">
+				  </div>
+				  <div class="col">
+				     <span class="input-label">Reading score</span>
+				     <input type="text" placeholder="7" ng-model="user.iletsReadingScore">
+				  </div>
+				   <div class="col">
+				     <span class="input-label">Writing score</span>
+				     <input type="text" placeholder="7.5" ng-model="user.iletsWritingScore">
+				  </div>
+				  <div class="col">
+				     <span class="input-label">Speaking  score</span>
+				     <input type="text" placeholder="7.5" ng-model="user.iletsSpeakingScore">
+				  </div>
+			      </div>
+			 </label>
+			<input type="hidden" ng-model="user.pageNumber" value="6"/>
+			 <div class="item item-divider item-light">
+		   		<button type="submit" class="button button-block button-positive" ng-click="{{ changeSavetoUpdate }}">Finish</button>
+			 </div>
+                   
+		  </div>
+     </div>
+        </ion-content>
+</ion-view> 

@@ -1,0 +1,40 @@
+/* Empty. Add your own CSS if you like */
+
+
+table, th , td  {
+  border: 1px solid grey;
+  border-collapse: collapse;
+  padding: 5px;
+}
+table tr:nth-child(odd)	{
+  background-color: #f1f1f1;
+}
+table tr:nth-child(even) {
+  background-color: #ffffff;
+}
+
+.col{
+
+padding:0px;
+
+
+}
+
+.row:nth-child(odd){
+
+/* background-color: #f1f1f1;*/
+
+}
+
+.row:nth-child(even){
+
+/*background-color: #ffffff;*/
+
+}
+
+.hitem{
+
+background-color: #f1f1f1;
+font-weight: bold;
+
+}
