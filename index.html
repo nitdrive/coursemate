@@ -30,8 +30,8 @@
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
   
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <script type="text/javascript" src="https://rawgithub.com/eligrey/FileSaver.js/master/FileSaver.js"></script>
+    <script type="text/javascript" src="js/jsapi.js"></script>
+    <script type="text/javascript" src="js/FileSaver.js"></script>
     <!-- your app's js -->
     <script src="js/app.js"></script>
     <script src="js/customise.js"></script>
@@ -100,121 +100,321 @@
             <ul class="list">
 
               <li ng-if="first.greeting.search">
-			<a class="item" ng-click="grefilter=!grefilter">GRE Score <i class="icon ion-chevron-down icon-right"></i></a>
+			
+			<a class="item" ng-click="grefilter=!grefilter">GRE <i class="icon ion-chevron-down icon-right"></i></a>
                         <ul class="list" ng-show="grefilter">
 			<li class="item">
-				<select ng-model="first.greFilterType.type">
+			<ion-toggle ng-model="first.filters.GRE.checked">
+          			GRE Filter
+                        </ion-toggle>
+				
+				<div ng-if="first.filters.GRE.checked">
+				<select ng-model="first.filters.GRE.Type" style="width:100%">
                                        
 					<option value="less than">less than</option>
 					<option value="greater than">greater than</option>
 					<option value="equal to">equal to</option>
 					<option value="between">in between</option>
 				</select>
+			       </div>
                         </li>
 			
-			<li class="item" ng-if="first.greFilterType.type==&apos;greater than&apos;">
+			<li class="item" ng-if="first.filters.GRE.Type==&apos;greater than&apos; &amp;&amp; first.filters.GRE.checked">
 				
 					  <span class="input-label" style="font-weight:bold;">Greater Than</span>
-					  <input type="number" ng-model="first.greFilterInputs.input1" style="width:25%;border:1px solid grey;">
+					  <input type="number" ng-model="first.filters.GRE.Inputs.input1" style="width:25%;border:1px solid grey;">
 		                
 			</li>
 
 		
-		        <li class="item" ng-if="first.greFilterType.type==&apos;less than&apos;">
+		        <li class="item" ng-if="first.filters.GRE.Type==&apos;less than&apos; &amp;&amp; first.filters.GRE.checked">
 				
 					  <span class="input-label" style="font-weight:bold;">Less Than</span>
-					  <input type="number" ng-model="first.greFilterInputs.input1" style="width:25%;border:1px solid grey;">
+					  <input type="number" ng-model="first.filters.GRE.Inputs.input1" style="width:25%;border:1px solid grey;">
 		               
 			</li>
 	
-			<li class="item" ng-if="first.greFilterType.type==&apos;equal to&apos;">
+			<li class="item" ng-if="first.filters.GRE.Type==&apos;equal to&apos; &amp;&amp; first.filters.GRE.checked">
 				
 					  <span class="input-label" style="font-weight:bold;">Equal To</span>
-					  <input type="number" ng-model="first.greFilterInputs.input1" style="width:25%;border:1px solid grey;">
+					  <input type="number" ng-model="first.filters.GRE.Inputs.input1" style="width:25%;border:1px solid grey;">
 		                
 			</li>
 
-			<li class="item" ng-if="first.greFilterType.type==&apos;between&apos;">
+			<li class="item" ng-if="first.filters.GRE.Type==&apos;between&apos; &amp;&amp; first.filters.GRE.checked">
 				
 					  <span class="input-label" style="font-weight:bold;">Between</span>
 					  
-					  <input type="number" ng-model="first.greFilterInputs.input1" style="width:20%;border:1px solid grey;">  &#xA0;--&#xA0;
-					  <input type="number" ng-model="first.greFilterInputs.input2" style="width:20%;border:1px solid grey;">
+					  <input type="number" ng-model="first.filters.GRE.Inputs.input1" style="width:20%;border:1px solid grey;">  &#xA0;--&#xA0;
+					  <input type="number" ng-model="first.filters.GRE.Inputs.input2" style="width:20%;border:1px solid grey;">
 					 
 		            
 
 			</li>
 			</ul>
-			<!--<ul class="list" ng-show="grefilter">
 			
-				  <li class="item item-checkbox">
-				     <ion-checkbox ng-model="first.greFlag.gre[0].checked">
-					    290 &lt;
-				       </ion-checkbox>
-				  </li>
+                
+              </li>
 
-				 <li class="item item-checkbox">
-				     <ion-checkbox ng-model="first.greFlag.gre[1].checked">
-					    300 &lt;
-				       </ion-checkbox>
-				    
-				  </li>
-				<li class="item item-checkbox">
-				     <ion-checkbox ng-model="first.greFlag.gre[2].checked">
-					    305 &lt;
-				       </ion-checkbox>
-				  </li>
-		        </ul>-->
+
+	       <li ng-if="first.greeting.search">
+			
+			<a class="item" ng-click="greQuantfilter=!greQuantfilter">GRE Quant <i class="icon ion-chevron-down icon-right"></i></a>
+                        <ul class="list" ng-show="greQuantfilter">
+			<li class="item">
+			<ion-toggle ng-model="first.filters.GREQuant.checked">
+          			GRE Quant Filter
+                        </ion-toggle>
+				
+				<div ng-if="first.filters.GREQuant.checked">
+				<select ng-model="first.filters.GREQuant.Type" style="width:100%">
+                                       
+					<option value="less than">less than</option>
+					<option value="greater than">greater than</option>
+					<option value="equal to">equal to</option>
+					<option value="between">in between</option>
+				</select>
+			       </div>
+                        </li>
+			
+			<li class="item" ng-if="first.filters.GREQuant.Type==&apos;greater than&apos; &amp;&amp; first.filters.GREQuant.checked">
+				
+					  <span class="input-label" style="font-weight:bold;">Greater Than</span>
+					  <input type="number" ng-model="first.filters.GREQuant.Inputs.input1" style="width:25%;border:1px solid grey;">
+		                
+			</li>
+
+		
+		        <li class="item" ng-if="first.filters.GREQuant.Type==&apos;less than&apos; &amp;&amp; first.filters.GREQuant.checked">
+				
+					  <span class="input-label" style="font-weight:bold;">Less Than</span>
+					  <input type="number" ng-model="first.filters.GREQuant.Inputs.input1" style="width:25%;border:1px solid grey;">
+		               
+			</li>
+	
+			<li class="item" ng-if="first.filters.GREQuant.Type==&apos;equal to&apos; &amp;&amp; first.filters.GREQuant.checked">
+				
+					  <span class="input-label" style="font-weight:bold;">Equal To</span>
+					  <input type="number" ng-model="first.filters.GREQuant.Inputs.input1" style="width:25%;border:1px solid grey;">
+		                
+			</li>
+
+			<li class="item" ng-if="first.filters.GREQuant.Type==&apos;between&apos; &amp;&amp; first.filters.GREQuant.checked">
+				
+					  <span class="input-label" style="font-weight:bold;">Between</span>
+					  
+					  <input type="number" ng-model="first.filters.GREQuant.Inputs.input1" style="width:20%;border:1px solid grey;">  &#xA0;--&#xA0;
+					  <input type="number" ng-model="first.filters.GREQuant.Inputs.input2" style="width:20%;border:1px solid grey;">
+					 
+		            
+
+			</li>
+			</ul>
+			
                 
               </li>
               
               <li ng-if="first.greeting.search">
-		        <a class="item" ng-click="grefilter=!grefilter">TOEFL SCORE <i class="icon ion-chevron-down icon-right"></i></a>
-			<ul class="list" ng-show="grefilter">
+		        <a class="item" ng-click="toeflfilter=!toeflfilter">TOEFL <i class="icon ion-chevron-down icon-right"></i></a>
+                        <ul class="list" ng-show="toeflfilter">
+			<li class="item">
+			<ion-toggle ng-model="first.filters.TOEFL.checked">
+          			TOEFL Filter
+                        </ion-toggle>
+				
+				<div ng-if="first.filters.TOEFL.checked">
+				<select ng-model="first.filters.TOEFL.Type" style="width:100%">
+                                       
+					<option value="less than">less than</option>
+					<option value="greater than">greater than</option>
+					<option value="equal to">equal to</option>
+					<option value="between">in between</option>
+				</select>
+			       </div>
+                        </li>
+			
+			<li class="item" ng-if="first.filters.TOEFL.Type==&apos;greater than&apos; &amp;&amp; first.filters.TOEFL.checked">
+				
+					  <span class="input-label" style="font-weight:bold;">Greater Than</span>
+					  <input type="number" ng-model="first.filters.TOEFL.Inputs.input1" style="width:25%;border:1px solid grey;">
+		                
+			</li>
 
-				   <li class="item item-checkbox">
-				     <ion-checkbox>
-					    80 &lt;
-				       </ion-checkbox>
-				  </li>
+		
+		        <li class="item" ng-if="first.filters.TOEFL.Type==&apos;less than&apos; &amp;&amp; first.filters.TOEFL.checked">
+				
+					  <span class="input-label" style="font-weight:bold;">Less Than</span>
+					  <input type="number" ng-model="first.filters.TOEFL.Inputs.input1" style="width:25%;border:1px solid grey;">
+		               
+			</li>
+	
+			<li class="item" ng-if="first.filters.TOEFL.Type==&apos;equal to&apos; &amp;&amp; first.filters.TOEFL.checked">
+				
+					  <span class="input-label" style="font-weight:bold;">Equal To</span>
+					  <input type="number" ng-model="first.filters.TOEFL.Inputs.input1" style="width:25%;border:1px solid grey;">
+		                
+			</li>
 
-				 <li class="item item-checkbox">
-				     <ion-checkbox>
-					    90 &lt;
-				       </ion-checkbox>
-				    
-				  </li>
-				<li class="item item-checkbox">
-				     <ion-checkbox>
-					    100 &lt;
-				       </ion-checkbox>
-				  </li>
-		        </ul>
+			<li class="item" ng-if="first.filters.TOEFL.Type==&apos;between&apos; &amp;&amp; first.filters.TOEFL.checked">
+				
+					  <span class="input-label" style="font-weight:bold;">Between</span>
+					  
+					  <input type="number" ng-model="first.filters.TOEFL.Inputs.input1" style="width:20%;border:1px solid grey;">  &#xA0;--&#xA0;
+					  <input type="number" ng-model="first.filters.TOEFL.Inputs.input2" style="width:20%;border:1px solid grey;">
+					 
+		            
+
+			</li>
+			</ul>
               </li>
 
  	     <li ng-if="first.greeting.search">
-		        <a class="item" ng-click="grefilter=!grefilter">ILETS Score <i class="icon ion-chevron-down icon-right"></i></a>
-		       
-			<ul class="list" ng-show="grefilter">
+		       <a class="item" ng-click="iletsfilter=!iletsfilter">ILETS <i class="icon ion-chevron-down icon-right"></i></a>
+                        <ul class="list" ng-show="iletsfilter">
+			<li class="item">
+			<ion-toggle ng-model="first.filters.ILETS.checked">
+          			ILETS Filter
+                        </ion-toggle>
+				
+				<div ng-if="first.filters.ILETS.checked">
+				<select ng-model="first.filters.ILETS.Type" style="width:100%">
+                                       
+					<option value="less than">less than</option>
+					<option value="greater than">greater than</option>
+					<option value="equal to">equal to</option>
+					<option value="between">in between</option>
+				</select>
+			       </div>
+                        </li>
+			
+			<li class="item" ng-if="first.filters.ILETS.Type ==&apos;greater than&apos; &amp;&amp; first.filters.ILETS.checked">
+				
+					  <span class="input-label" style="font-weight:bold;">Greater Than</span>
+					  <input type="number" ng-model="first.filters.ILETS.Inputs.input1" style="width:25%;border:1px solid grey;">
+		                
+			</li>
 
-				   <li class="item item-checkbox">
-				     <ion-checkbox>
-					    6 &lt;
-				       </ion-checkbox>
-				  </li>
+		
+		        <li class="item" ng-if="first.filters.ILETS.Type ==&apos;less than&apos; &amp;&amp; first.filters.ILETS.checked">
+				
+					  <span class="input-label" style="font-weight:bold;">Less Than</span>
+					  <input type="number" ng-model="first.filters.ILETS.Inputs.input1" style="width:25%;border:1px solid grey;">
+		               
+			</li>
+	
+			<li class="item" ng-if="first.filters.ILETS.Type ==&apos;equal to&apos; &amp;&amp; first.filters.ILETS.checked">
+				
+					  <span class="input-label" style="font-weight:bold;">Equal To</span>
+					  <input type="number" ng-model="first.filters.ILETS.Inputs.input1" style="width:25%;border:1px solid grey;">
+		                
+			</li>
 
-				 <li class="item item-checkbox">
-				     <ion-checkbox>
-					    7 &lt;
-				       </ion-checkbox>
-				    
-				  </li>
-				<li class="item item-checkbox">
-				     <ion-checkbox>
-					    8 &lt;
-				       </ion-checkbox>
-				  </li>
-		        </ul>
+			<li class="item" ng-if="first.filters.ILETS.Type ==&apos;between&apos; &amp;&amp; first.filters.ILETS.checked">
+				
+					  <span class="input-label" style="font-weight:bold;">Between</span>
+					  
+					  <input type="number" ng-model="first.filters.ILETS.Inputs.input1" style="width:20%;border:1px solid grey;">  &#xA0;--&#xA0;
+					  <input type="number" ng-model="first.filters.ILETS.Inputs.input2" style="width:20%;border:1px solid grey;">
+					 
+		            
+
+			</li>
+			</ul>
+              </li>
+
+
+	    <li ng-if="first.greeting.search">
+
+		        <a class="item" ng-click="gpafilter=!gpafilter">Undergrad GPA<i class="icon ion-chevron-down icon-right"></i></a>
+                        <ul class="list" ng-show="gpafilter">
+			<li class="item">
+			<ion-toggle ng-model="first.filters.undergradGPA.checked">
+          			Undergrad GPA Filter
+                        </ion-toggle>
+				
+				<div ng-if="first.filters.undergradGPA.checked">
+				<select ng-model="first.filters.undergradGPA.Type" style="width:100%">
+                                       
+					<option value="less than">less than</option>
+					<option value="greater than">greater than</option>
+					<option value="equal to">equal to</option>
+					<option value="between">in between</option>
+				</select>
+			       </div>
+                        </li>
+			
+			<li class="item" ng-if="first.filters.undergradGPA.Type ==&apos;greater than&apos; &amp;&amp; first.filters.undergradGPA.checked">
+				
+					  <span class="input-label" style="font-weight:bold;">Greater Than</span>
+					  <input type="number" ng-model="first.filters.undergradGPA.Inputs.input1" style="width:25%;border:1px solid grey;">
+		                
+			</li>
+
+		
+		        <li class="item" ng-if="first.filters.undergradGPA.Type ==&apos;less than&apos; &amp;&amp; first.filters.undergradGPA.checked">
+				
+					  <span class="input-label" style="font-weight:bold;">Less Than</span>
+					  <input type="number" ng-model="first.filters.undergradGPA.Inputs.input1" style="width:25%;border:1px solid grey;">
+		               
+			</li>
+	
+			<li class="item" ng-if="first.filters.undergradGPA.Type ==&apos;equal to&apos; &amp;&amp; first.filters.undergradGPA.checked">
+				
+					  <span class="input-label" style="font-weight:bold;">Equal To</span>
+					  <input type="number" ng-model="first.filters.undergradGPA.Inputs.input1" style="width:25%;border:1px solid grey;">
+		                
+			</li>
+
+			<li class="item" ng-if="first.filters.undergradGPA.Type ==&apos;between&apos; &amp;&amp; first.filters.undergradGPA.checked">
+				
+					  <span class="input-label" style="font-weight:bold;">Between</span>
+					  
+					  <input type="number" ng-model="first.filters.undergradGPA.Inputs.input1" style="width:20%;border:1px solid grey;">  &#xA0;--&#xA0;
+					  <input type="number" ng-model="first.filters.undergradGPA.Inputs.input2" style="width:20%;border:1px solid grey;">
+					 
+		            
+
+			</li>
+			</ul>
+              </li>
+
+	    <li ng-if="first.greeting.search">
+		        <a class="item" ng-click="stateFilter=!stateFilter">State <i class="icon ion-chevron-down icon-right"></i></a>
+		        
+			<div ng-if="stateFilter">
+				Select a State
+				<select ng-model="stateName" style="width:100%">
+                                       
+					<option value="Andhra Pradesh">Andhra Pradesh</option>
+					<option value="Karnataka">Karnataka</option>
+					<option value="Tamil Nadu">Tamil Nadu</option>
+					<option value="Maharashtra">Maharashtra</option>
+				</select>
+                                
+                                <div ng-if="stateName === &apos;Andhra Pradesh&apos;">
+					<ion-toggle ng-model="first.states.Andhra.stateChecked ">
+		  				Andhra Pradesh
+		                	</ion-toggle>
+				</div>	
+	
+				<div ng-if="stateName === &apos;Karnataka&apos;">
+					<ion-toggle ng-model="first.states.Karnataka.stateChecked">
+		  				Karnataka
+		                	</ion-toggle>
+				</div>				
+				
+				<div ng-if="stateName === &apos;Tamil Nadu&apos;">
+					<ion-toggle ng-model="first.states.TamilNadu.stateChecked">
+		  				Tamil Nadu
+		                	</ion-toggle>
+				</div>
+
+				<div ng-if="stateName === &apos;Maharashtra&apos;">
+					<ion-toggle ng-model="first.states.Maharashtra.stateChecked"> 
+			  			Maharashtra
+			                </ion-toggle>
+				</div>
+		       </div>
               </li>
 
 	     <li ng-if="first.greeting.search">
@@ -385,35 +585,7 @@
 
 
 
-              <li ng-if="first.greeting.search">
-		        <a class="item" ng-click="grefilter=!grefilter">State <i class="icon ion-chevron-down icon-right"></i></a>
-		      
-			<ul class="list" ng-show="grefilter">
-
-				  <li class="item item-checkbox">
-				
-				      <ion-checkbox ng-model="first.flags.stateData[1].stateChecked">
-					   Andhra Pradesh
-				       </ion-checkbox>
-			
-				
-				    
-				  </li>
-
-				 <li class="item item-checkbox">
-				     <ion-checkbox>
-					   Karnataka	
-				      </ion-checkbox>
-				    
-				  </li>
-				<li class="item item-checkbox">
-				     <ion-checkbox>
-					  Tamil Nadu
-				      </ion-checkbox>
-				    
-				  </li>
-		        </ul>
-              </li>
+              
 
 
 
@@ -444,32 +616,7 @@
 		        </ul>
               </li>
            
-              <li ng-if="first.greeting.search">
-		        <a class="item" ng-click="grefilter=!grefilter">GPA <i class="icon ion-chevron-down icon-right"></i></a>
-		        
-			<ul class="list" ng-show="grefilter">
-
-				  <li class="item item-checkbox">
-				     <label class="checkbox">
-				       <input type="checkbox">
-				     </label>
-				     6 &lt;
-				  </li>
-
-				 <li class="item item-checkbox">
-				     <label class="checkbox">
-				       <input type="checkbox">
-				     </label>
-				     7 &lt;
-				  </li>
-				<li class="item item-checkbox">
-				     <label class="checkbox">
-				       <input type="checkbox">
-				     </label>
-				     8 &lt;
-				  </li>
-		        </ul>
-              </li>
+              
 
 
              <li ng-if="first.greeting.search">
@@ -514,36 +661,7 @@
         </ion-side-menu>
 
 
-    <!-- 
-
-<button class="button button-clear button-dark" ng-click="grefilter=!grefilter">TOEFL Score <i class="icon ion-chevron-down icon-right"></i>
-		        </button>
-			<ul class="list" ng-show="grefilter">
-
-				  <li class="item item-checkbox">
-				     <label class="checkbox">
-				       <input type="checkbox">
-				     </label>
-				     290 <
-				  </li>
-
-				 <li class="item item-checkbox">
-				     <label class="checkbox">
-				       <input type="checkbox">
-				     </label>
-				     300 <
-				  </li>
-				<li class="item item-checkbox">
-				     <label class="checkbox">
-				       <input type="checkbox">
-				     </label>
-				     305 <
-				  </li>
-		        </ul>
-
-
-
--->
+    
        
       
         

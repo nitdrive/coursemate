@@ -9,6 +9,13 @@ var SchoolMateControllerModule = angular.module('schoolmate.controllers', ['ngSt
 
 SchoolMateControllerModule.controller('UserAppHomeCtrl', function ($scope,userService,$rootScope,$localStorage) {
 
+        
+	 if(!navigator.onLine)
+	 {
+		
+		alert("You Must be connected to the Internet to use this App");
+		
+	 }
          $scope.toggleUserLogin = function() {
 
                  location.href = "#user/login/";

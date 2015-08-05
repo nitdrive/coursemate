@@ -9,6 +9,13 @@ var SchoolMateControllerModule = angular.module('schoolmate.controllers', ['ngSt
 
 SchoolMateControllerModule.controller('UserAppHomeCtrl', function ($scope,userService,$rootScope,$localStorage) {
 
+
+	 if(!navigator.onLine)
+	 {
+		
+		alert("You Must be connected to the Internet to use this App");
+		
+	 }
          $scope.toggleUserLogin = function() {
 
                  location.href = "#user/login/";
@@ -212,7 +219,7 @@ SchoolMateControllerModule.controller('UserAppHomeCtrl', function ($scope,userSe
            else
 	   {
             // alert("In Normal");
-		alert("Username or Password cannot be empty 1");
+		
                    $scope.$storage.a.push(user);
                    
 		   if($scope.$storage.count == 4)
@@ -222,15 +229,10 @@ SchoolMateControllerModule.controller('UserAppHomeCtrl', function ($scope,userSe
 
 			if(!this.checkPassword(this.pass,user.cpass))
 			{ 
-			  alert("Username or Password cannot be empty 2");
+			 
 		            return;
 			}
-			if(this.pass==null || user.cpass==null || user.uname ==null)
-			{
-				alert("Username or Password cannot be empty 3");
-				
-			}
-
+			
 		   }
 		   if($scope.$storage.count == 7)
 		   {

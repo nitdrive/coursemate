@@ -5,102 +5,63 @@
 	
         <div id="chart-div3"></div>
    	
-         <!--<div class="row" ng-if="!first.flags.stateData[1].stateChecked"> 
-		<div class="col thead">
-                <div class="item hitem">
-                    <h3>Name</h3>                        
-                     
-                </div>
-               </div> 
-		
-		<div class="col thead">
-                <div class="item hitem">
-                    <h3>GRE Score</h3>                        
-                     
-                </div>
-               </div> 
-	width="100%"
-		<div class="col thead">
-                <div class="item hitem">
-                    <h3>TOEFL Score</h3>                        
-                     
-                </div>
-               </div> 
-
-		
-		
-		<div class="col thead">
-                <div class="item hitem">
-                    <h3>GPA</h3>                        
-                     
-                </div>
-               </div> 
-
-		<div class="col thead">
-                <div class="item hitem">
-                    <h3>Semester Intended</h3>                        
-                     
-                </div>
-               </div> 
-	</div>
-
- <div class="row" ng-if="!first.flags.stateData[1].stateChecked" ng-repeat="user in searchList | limitTo:30">
-
-            <div class="col">
-                <div class="item">
-                    <h3>{{user.firstName | uppercase }}</h3>                        
-                     
-                </div>
-            </div> 
-	   <div class="col">
-                <div class="item item-button-right">
-                    <h3>{{user.greScore}}</h3>                        
-                   
-                </div>
-            </div> 
-	   <div class="col">
-                <div class="item item-button-right">
-                    <h3>{{user.toeflScore}}</h3>                        
-                     
-                </div>
-            </div> 
-	  
-	   <div class="col">
-                <div class="item item-button-right">
-                    <h3>{{user.undergradGPA}}</h3>                        
-                    
-                </div>
-            </div> 
-	   <div class="col">
-                <div class="item item-button-right">
-                    <h3>{{user.semesterIntended | uppercase}}</h3>                        
-                     
-                </div>
-            </div>             
-
-        </div>-->
-	<div id="greDataBlock" ng-if="greData">
+        <div id="districtWiseDataBlock" ng-if="first.states.Andhra.stateChecked || first.states.Karnataka.stateChecked || first.states.TamilNadu.stateChecked || first.states.Maharashtra.stateChecked">
+	
+	 <table style="width:100%;">
+			  <tr>
+			     <th colspan="2" ng-if="first.states.Andhra.stateChecked">District wise count of Registered Users State: {{ first.states.Andhra.statename }}</th>
+<th colspan="2" ng-if="first.states.Karnataka.stateChecked">District wise count of Registered Users State: {{ first.states.Karnataka.statename }}</th>
+<th colspan="2" ng-if="first.states.TamilNadu.stateChecked">District wise count of Registered Users State: {{ first.states.TamilNadu.statename }}</th>
+<th colspan="2" ng-if="first.states.Maharashtra.stateChecked">District wise count of Registered Users State: {{ first.states.Maharashtra.statename }}</th>
+			  </tr>
+                          <tr>
+                            
+			    
+			     <th>District</th>
+			     <th>No of Registrations</th>
+			     
+                          </tr>
+			  <tr ng-repeat="user in stateData">
+			   
+			    <td>{{user.district}}</td>
+			    <td>{{user.count}}</td>
+			    
+			  </tr>
+			
+			 <tr>
+			    <td ng-if="chartData.length == 0"><strong>No results found...</strong></td>
+			 </tr>
+         </table><br>
+	<button class="ion-ios-download" ng-click="exportDistrictWiseData()">
+  			Export District Wise Data
+        </button>
+        </div>
+	<div id="filteredDataBlock" ng-if="first.filters.GRE.checked || first.filters.TOEFL.checked || first.filters.ILETS.checked">
 	<table style="float:center;width:100%" >
 		
 	                  <tr>
-				<th colspan="6">{{ greTitle }} </th>
+				<th colspan="8">{{ filteredDataTitle }} </th>
 			  </tr>
                           <tr>
                              <th>Name</th>
 			     <th>GRE Score</th>
+			     <th>GRE Quant Score</th>
+			     <th>GRE Verbal Score</th>
+			     <th>GRE AWA SCORE</th>
 			     <th>TOEFL Score</th>
 			     <th>ILETS Score</th>
-			     <th>GPA</th>
 			     <th>Semester</th>
 			     
                              <!--<th>{{ first.flags.stateChecked }}</th>-->
                           </tr>
-			  <tr ng-repeat="user in greData">
+			  <tr ng-repeat="user in filteredData">
 			    <td>{{user.firstName | uppercase }}</td>
 			    <td>{{user.greScore}}</td>
+			    <td>{{user.greQuantScore}}</td>
+			    <td>{{user.greVerbalScore}}</td>
+			    <td>{{user.greAWAScore}}</td>
 			    <td>{{user.toeflScore}}</td>
 			    <td>{{user.iletsScore}}</td>
-			    <td>{{user.undergradGPA}}</td>
 			    <td>{{user.semesterIntended}}</td>
 			    
 			  </tr>
@@ -113,69 +74,298 @@
 
         </table>
         <br>
-        <button class="ion-ios-download" ng-click="exportGREData()">
+        
+        <button class="ion-ios-download" ng-click="exportFilteredData()">
   			Export
         </button>
 	</div>
 
-        <div id="all">
+        <div id="masterDataBlock" style="display:none;">      <!-- DO NOT MODIFY THIS DIV UNLESS SCHEMA CHANGE IS REQUIRED IN DATABASE --->
 	<table ng-if="!greData" style="float:center;width:100%;">
 			  <tr>
-				<th colspan="5">All Registered Users </th>
+				<th colspan="32">All Registered Users </th>
 			  </tr>
-                          <tr>
-                             <th>Name</th>
-			     <th>GRE Score</th>
-			     <th>TOEFL Score</th>
-			     <th>GPA</th>
-			     <th>Semester</th>
+                          <tr class="thead" style="font-weight:bold;">
+                             <th>First Name</th>
+			     <th>Middle Name</th>
+			     <th>Last Name</th>
+	
+			     <th>GRE Total Score</th>
+			     <th>GRE Quant Score</th>
+			     <th>GRE Verbal Score</th>
+			     <th>GRE AWA Score</th>
+
+			     <th>TOEFL Total Score</th>
+			     <th>TOEFL Reading Score</th>
+			     <th>TOEFL Writing Score</th>
+			     <th>TOEFL Listening Score</th>
+			     <th>TOEFL Speaking Score</th>
+
+			     <th>ILETS Total Score</th>
+			     <th>ILETS Reading Score</th>
+			     <th>ILETS Writing Score</th>
+			     <th>ILETS Listening Score</th>
+			     <th>ILETS Speaking Score</th>
+
+			     <th>Undergrad GPA</th>
+			     <th>Undergrad Major</th>
+			     <th>Undergrad College</th>
+			     <th>Undergrad CollegeCity</th>
+			     <th>Undergrad CollegeState</th>
+			     <th>Undergrad CollegeCountry</th>
+
+
+			     <th>Semester Intended</th>
+			     <th>Major Intended</th>
+			     <th>Degree Expected</th>
+			     
+			     <th>Email</th>
+			     <th>Phno</th>
+			     <th>City</th>
+			     <th>District</th>
+			     <th>State</th>
+			     <th>Country</th>
+			     
 			     
                              <!--<th>{{ first.flags.stateChecked }}</th>-->
                           </tr>
 			  <tr ng-repeat="user in searchList ">
-			    <td>{{user.firstName}}</td>
+			    <td>{{user.firstName | uppercase}}</td>
+			    <td>{{user.middleName | uppercase}}</td>
+			    <td>{{user.lastName | uppercase}}</td>
+
 			    <td>{{user.greScore}}</td>
+			    <td>{{user.greQuantScore}}</td>
+			    <td>{{user.greVerbalScore}}</td>
+			    <td>{{user.greAWAScore}}</td>
+
 			    <td>{{user.toeflScore}}</td>
-			    <td>{{user.undergradGPA}}</td>
-			    <td>{{user.semesterIntended}}</td>
+                            <td>{{user.toeflReadingScore}}</td>
+			    <td>{{user.toeflWritingScore}}</td>
+			    <td>{{user.toeflListeningScore}}</td>
+			    <td>{{user.toeflSpeakingScore}}</td>
 			    
+                            <td>{{user.iletsScore}}</td>
+			    <td>{{user.iletsReadingScore}}</td>
+			    <td>{{user.iletsWritingScore}}</td>
+			    <td>{{user.iletsListeningScore}}</td>
+			    <td>{{user.iletsSpeakingScore}}</td>
+
+			    
+			    <td>{{user.undergradGPA }}</td>
+			    <td>{{user.undergradMajor  | uppercase }}</td>
+			    <td>{{user.undergradCollege  | uppercase }}</td>
+			    <td>{{user.undergradCollegeCity  | uppercase }}</td>
+			    <td>{{user.undergradCollegeState  | uppercase }}</td>
+			    <td>{{user.undergradCollegeCountry  | uppercase}}</td>
+
+			    <td>{{user.semesterIntended  | uppercase}}</td>
+                            <td>{{user.majorIntended  | uppercase}}</td>
+			    <td>{{user.degreeExpected  | uppercase}}</td>
+
+			    <td>{{user.email }}</td>
+			    <td>{{user.phoneNumber}}</td>
+			    <td>{{user.city  | uppercase}}</td>
+			    <td>{{user.district  | uppercase}}</td>
+			    <td>{{user.state  | uppercase}}</td>
+			    <td>{{user.country}}</td>
+
 			  </tr>
 			
 			 <tr>
 			    <td ng-if="userlist.length == 0"><strong>No results found...</strong></td>
 			 </tr>
          </table>
+         
+       
+        
+ 
+        </div>
+	
+
+	
+	
+	<div class="card">
+	  <div class="item item-divider" ng-click="masterOptions=!masterOptions">
+	     
+	    Export Options - Master Table <i class="icon ion-chevron-down icon-right"></i>
+	  </div>
+	  <div class="item item-text-wrap" ng-show="masterOptions">
+          <button class="ion-android-contacts" ng-click="showCustomTable()" ng-if="!customBlock">
+  			Show Table
+          </button>
+	  <button class="ion-android-contacts" ng-click="showCustomTable()" ng-if="customBlock" >
+  			Hide Table
+          </button>
+	  <br><br>
+	  <div class="row">
+		  <div class="col"><input type="checkbox" ng-model="first.exportOptions.option[0].checked">GRE</div>
+		  <div class="col"><input type="checkbox" ng-model="first.exportOptions.option[1].checked">QUANT</div>
+		  <div class="col"><input type="checkbox" ng-model="first.exportOptions.option[2].checked">VERBAL</div>
+		  <div class="col"><input type="checkbox" ng-model="first.exportOptions.option[3].checked">AWA</div>
+		  <div class="col"><input type="checkbox" ng-model="first.exportOptions.option[4].checked">GPA</div>
+		  
+          </div>
+	  <div class="row">
+		  
+		  <div class="col"><input type="checkbox" ng-model="first.exportOptions.option[5].checked">TOEFL</div>
+		  <div class="col"><input type="checkbox" ng-model="first.exportOptions.option[6].checked">TOEFL READING</div>
+		  <div class="col"><input type="checkbox" ng-model="first.exportOptions.option[7].checked">TOEFL WRITING</div>
+		  <div class="col"><input type="checkbox" ng-model="first.exportOptions.option[8].checked">TOEFL LISTENING</div>
+		  <div class="col"><input type="checkbox" ng-model="first.exportOptions.option[9].checked">TOEFL SPEAKING</div>
+	  </div>
+          <div class="row">
+		  <div class="col"><input type="checkbox" ng-model="first.exportOptions.option[10].checked">ILETS</div>
+		  <div class="col"><input type="checkbox" ng-model="first.exportOptions.option[11].checked">ILETS READING</div>
+		  <div class="col"><input type="checkbox" ng-model="first.exportOptions.option[12].checked">ILETS WRITING</div>
+		  <div class="col"><input type="checkbox" ng-model="first.exportOptions.option[13].checked">ILETS LISTENING</div>
+		  <div class="col"><input type="checkbox" ng-model="first.exportOptions.option[14].checked">ILETS SPEAKING</div>
+	  </div>
+         <div class="row">
+		  <div class="col"><input type="checkbox" ng-model="first.exportOptions.option[15].checked">UNDERGRAD MAJOR</div>
+		  <div class="col"><input type="checkbox" ng-model="first.exportOptions.option[16].checked">INTENDED MAJOR</div>
+		  <div class="col"><input type="checkbox" ng-model="first.exportOptions.option[17].checked">INTENDED SEMESTER</div>
+		  <div class="col"><input type="checkbox" ng-model="first.exportOptions.option[18].checked">DEGREE EXPECTED</div>
+		  <div class="col"><input type="checkbox" ng-model="first.exportOptions.option[19].checked">UNDERGRAD COLLEGE</div>
+		  
+        </div>
+	<div class="row">	
+		  
+		  <div class="col"><input type="checkbox" ng-model="first.exportOptions.option[20].checked">COLLEGE CITY</div>
+		  <div class="col"><input type="checkbox" ng-model="first.exportOptions.option[21].checked">COLLEGE STATE</div>
+		  <div class="col"><input type="checkbox" ng-model="first.exportOptions.option[22].checked">COLLEGE COUNTRY</div>
+		  <div class="col"><input type="checkbox" ng-model="first.exportOptions.option[23].checked">EMAIL</div>
+	          <div class="col"><input type="checkbox" ng-model="first.exportOptions.option[24].checked">PHONE NUMBER</div>
+		  
+        </div>
+        <div class="row">
+		  
+		 
+		  <div class="col"><input type="checkbox" ng-model="first.exportOptions.option[25].checked">CITY</div>
+		  <div class="col"><input type="checkbox" ng-model="first.exportOptions.option[26].checked">DISTRICT</div>
+		  <div class="col"><input type="checkbox" ng-model="first.exportOptions.option[27].checked">STATE</div>
+		  <div class="col"><input type="checkbox" ng-model="first.exportOptions.option[28].checked">COUNTRY</div>
+		  <div class="col"></div>
+          </div>
+ 
+           
+          <br>
+	   	<button class="ion-ios-download" ng-click="exportMasterData()">
+  			Export Master Table
+                </button>
+		<button class="ion-ios-download" ng-click="exportCustomTable()">
+  			Export Custom Table
+                </button>
+	  </div>
+	 
+       </div>
+
+
+       <div id="customDataBlock" ng-show="customBlock">
+	<table style="float:center;width:100%;">
+			  <tr>
+				<th colspan="32" style="font-weight:bold;">All Registered Users </th>
+			  </tr>
+                          <tr class="thead" style="font-weight:bold;">
+                             <th>First Name</th>
+			     <th>Middle Name</th>
+			     <th>Last Name</th>
+	
+			     <th ng-if="first.exportOptions.option[0].checked">GRE Total Score</th>
+			     <th ng-if="first.exportOptions.option[1].checked">GRE Quant Score</th>
+			     <th ng-if="first.exportOptions.option[2].checked">GRE Verbal Score</th>
+			     <th ng-if="first.exportOptions.option[3].checked">GRE AWA Score</th>
+
+			     <th ng-if="first.exportOptions.option[5].checked">TOEFL Total Score</th>
+			     <th ng-if="first.exportOptions.option[6].checked">TOEFL Reading Score</th>
+			     <th ng-if="first.exportOptions.option[7].checked">TOEFL Writing Score</th>
+			     <th ng-if="first.exportOptions.option[8].checked">TOEFL Listening Score</th>
+			     <th ng-if="first.exportOptions.option[9].checked">TOEFL Speaking Score</th>
+
+			     <th ng-if="first.exportOptions.option[10].checked">ILETS Total Score</th>
+			     <th ng-if="first.exportOptions.option[11].checked">ILETS Reading Score</th>
+			     <th ng-if="first.exportOptions.option[12].checked">ILETS Writing Score</th>
+			     <th ng-if="first.exportOptions.option[13].checked">ILETS Listening Score</th>
+			     <th ng-if="first.exportOptions.option[14].checked">ILETS Speaking Score</th>
+
+			     <th ng-if="first.exportOptions.option[4].checked">Undergrad GPA</th>
+			     <th ng-if="first.exportOptions.option[15].checked">Undergrad Major</th>
+			     <th ng-if="first.exportOptions.option[19].checked">Undergrad College</th>
+			     <th ng-if="first.exportOptions.option[20].checked">Undergrad College City</th>
+			     <th ng-if="first.exportOptions.option[21].checked">Undergrad College State</th>
+			     <th ng-if="first.exportOptions.option[22].checked">Undergrad College Country</th>
+
+
+			     <th ng-if="first.exportOptions.option[17].checked">Semester Intended</th>
+			     <th ng-if="first.exportOptions.option[16].checked">Major Intended</th>
+			     <th ng-if="first.exportOptions.option[18].checked">Degree Expected</th>
+			     
+			     <th ng-if="first.exportOptions.option[23].checked">Email</th>
+			     <th ng-if="first.exportOptions.option[24].checked">Phone Number</th>
+			     <th ng-if="first.exportOptions.option[25].checked">City</th>
+			     <th ng-if="first.exportOptions.option[26].checked">District</th>
+			     <th ng-if="first.exportOptions.option[27].checked">State</th>
+			     <th ng-if="first.exportOptions.option[28].checked">Country</th>
+			     
+			     
+                             <!--<th>{{ first.flags.stateChecked }}</th>-->
+                          </tr>
+			  <tr ng-repeat="user in searchList ">
+			    <td>{{user.firstName | uppercase}}</td>
+			    <td>{{user.middleName | uppercase}}</td>
+			    <td>{{user.lastName | uppercase}}</td>
+
+			    <td ng-if="first.exportOptions.option[0].checked">{{user.greScore}}</td>
+			    <td ng-if="first.exportOptions.option[1].checked">{{user.greQuantScore}}</td>
+			    <td ng-if="first.exportOptions.option[2].checked">{{user.greVerbalScore}}</td>
+			    <td ng-if="first.exportOptions.option[3].checked">{{user.greAWAScore}}</td>
+
+			    <td ng-if="first.exportOptions.option[5].checked">{{user.toeflScore}}</td>
+                            <td ng-if="first.exportOptions.option[6].checked">{{user.toeflReadingScore}}</td>
+			    <td ng-if="first.exportOptions.option[7].checked">{{user.toeflWritingScore}}</td>
+			    <td ng-if="first.exportOptions.option[8].checked">{{user.toeflListeningScore}}</td>
+			    <td ng-if="first.exportOptions.option[9].checked">{{user.toeflSpeakingScore}}</td>
+			    
+                            <td ng-if="first.exportOptions.option[10].checked">{{user.iletsScore}}</td>
+			    <td ng-if="first.exportOptions.option[11].checked">{{user.iletsReadingScore}}</td>
+			    <td ng-if="first.exportOptions.option[12].checked">{{user.iletsWritingScore}}</td>
+			    <td ng-if="first.exportOptions.option[13].checked">{{user.iletsListeningScore}}</td>
+			    <td ng-if="first.exportOptions.option[14].checked">{{user.iletsSpeakingScore}}</td>
+
+			    
+			    <td ng-if="first.exportOptions.option[4].checked">{{user.undergradGPA }}</td>
+			    <td ng-if="first.exportOptions.option[15].checked">{{user.undergradMajor  | uppercase }}</td>
+			    <td ng-if="first.exportOptions.option[19].checked">{{user.undergradCollege  | uppercase }}</td>
+			    <td ng-if="first.exportOptions.option[20].checked">{{user.undergradCollegeCity  | uppercase }}</td>
+			    <td ng-if="first.exportOptions.option[21].checked">{{user.undergradCollegeState  | uppercase }}</td>
+			    <td ng-if="first.exportOptions.option[22].checked">{{user.undergradCollegeCountry  | uppercase}}</td>
+
+			    <td ng-if="first.exportOptions.option[17].checked">{{user.semesterIntended  | uppercase}}</td>
+                            <td ng-if="first.exportOptions.option[16].checked">{{user.majorIntended  | uppercase}}</td>
+			    <td ng-if="first.exportOptions.option[18].checked">{{user.degreeExpected  | uppercase}}</td>
+
+			    <td ng-if="first.exportOptions.option[23].checked">{{user.email }}</td>
+			    <td ng-if="first.exportOptions.option[24].checked">{{user.phoneNumber}}</td>
+			    <td ng-if="first.exportOptions.option[25].checked">{{user.city  | uppercase}}</td>
+			    <td ng-if="first.exportOptions.option[26].checked">{{user.district  | uppercase}}</td>
+			    <td ng-if="first.exportOptions.option[27].checked">{{user.state  | uppercase}}</td>
+			    <td ng-if="first.exportOptions.option[28].checked">{{user.country}}</td>
+
+			  </tr>
+			
+			 <tr>
+			    <td ng-if="userlist.length == 0"><strong>No results found...</strong></td>
+			 </tr>
+         </table>
+         
+	<br>
+       
+        
  
         </div>
 
 	 
-	<div id="stateChecks">
 	
-	 <table>
-			  <tr ng-if="first.flags.stateData[1].stateChecked || first.flags.stateData[16].stateChecked">
-			     <th colspan="3">District wise count of Registered Users</th>
-			  </tr>
-                          <tr ng-if="first.flags.stateData[1].stateChecked || first.flags.stateData[16].stateChecked">
-                            
-			     <th>State</th>
-			     <th>District</th>
-			     <th>No of Registrations</th>
-			     
-                          </tr>
-			  <tr ng-repeat="user in first.chartData">
-			   
-			    <td ng-if="first.flags.stateData[1].stateChecked">{{ first.flags.stateData[1].state }}</td>
-			    <td ng-if="first.flags.stateData[16].stateChecked">{{ first.flags.stateData[16].state }}</td>
-			    <td>{{user.district}}</td>
-			    <td>{{user.count}}</td>
-			    
-			  </tr>
-			
-			 <tr>
-			    <td ng-if="chartData.length == 0"><strong>No results found...</strong></td>
-			 </tr>
-         </table>
-        </div>
 	
 	<!--<div id="chart-div3"></div>-->
 	

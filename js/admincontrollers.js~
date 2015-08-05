@@ -302,22 +302,17 @@ SchoolMateAdminControllerModule.controller('AdminAppLoginCtrl', function ($scope
     
     console.log("SideMenuCtrl");
     var first = this;
-    first.flags = AdminAppSearchService.flags;
+    first.states = AdminAppSearchService.states;
     first.greFlag =  AdminAppSearchService.greFlag;
     first.greFilterInputs = AdminAppSearchService.greFilterInputs;
     first.greFilterType = AdminAppSearchService.greFilterType;
-    console.log("In SideMenu CTRL-State checked:"+first.flags.stateData[1].state+"--"+first.flags.stateData[1].stateChecked);
+    first.filters = AdminAppSearchService.filters;
+    console.log("In SideMenu CTRL-State checked");
     first.greeting = SideMenuOptions;
     $scope.$storage = $localStorage;
     console.log("Search:"+first.greeting.search); 
    
-    $scope.stateChecked = function(){  
-	
-	
-
-
-
-     } 
+    
     
       $scope.showMenu = function () {
         
@@ -376,11 +371,19 @@ SchoolMateAdminControllerModule.controller('AdminAppLoginCtrl', function ($scope
 var _this = this;
 
 //_this.flags = {stateChecked:false};
-_this.flags = {stateData:[{state:"Andaman and Nicobar Islands",stateChecked:false},{state:"Andhra Pradesh",stateChecked:false},{state:"Arunachal Pradesh",stateChecked:false},{state:"Assam",stateChecked:false},{state:"Bihar",stateChecked:false},{state:"Chandigarh",stateChecked:false},{state:"Chhattisgarh",stateChecked:false},{state:"Dadra and Nagar Haveli",stateChecked:false},{state:"Daman and Diu",stateChecked:false},{state:"Delhi",stateChecked:false},{state:"Goa",stateChecked:false},{state:"Gujarat",stateChecked:false},{state:"Haryana",stateChecked:false},{state:"Himachal Pradesh",stateChecked:false},{state:"Jammu and Kashmir",stateChecked:false},{state:"Jharkhand",stateChecked:false},{state:"Karnataka",stateChecked:false},{state:"Kerala",stateChecked:false},{state:"Lakshadweep",stateChecked:false},{state:"Madhya Pradesh",stateChecked:false},{state:"Maharashtra",stateChecked:false},{state:"Manipur",stateChecked:false},{state:"Meghalaya",stateChecked:false},{state:"Mizoram",stateChecked:false},{state:"Nagaland",stateChecked:false},{state:"Odisha",stateChecked:false},{state:"Puducherry",stateChecked:false},{state:"Punjab",stateChecked:false},{state:"Rajasthan",stateChecked:false},{state:"Sikkim",stateChecked:false},{state:"Tamil Nadu",stateChecked:false},{state:"Telangana",stateChecked:false},{state:"Tripura",stateChecked:false},{state:"Uttar Pradesh",stateChecked:false},{state:"Uttarakhand",stateChecked:false},{state:"West Bengal",stateChecked:false}]};
+_this.states = {Andaman:{statename:"Andaman and Nicobar Islands",stateChecked:false},Andhra:{statename:"Andhra Pradesh",stateChecked:false},Arunachal:
+{statename:"Arunachal Pradesh",stateChecked:false},Assam:{statename:"Assam",stateChecked:false},Bihar:{statename:"Bihar",stateChecked:false},
+Chandigarh:{statename:"Chandigarh",stateChecked:false},Chhattisgarh:{statename:"Chhattisgarh",stateChecked:false},Dadra:{statename:"Dadra and Nagar Haveli",stateChecked:false},Daman:{statename:"Daman and Diu",stateChecked:false},Delhi:{statename:"Delhi",stateChecked:false},Goa:{statename:"Goa",stateChecked:false},Gujarat:{statename:"Gujarat",stateChecked:false},Haryana:{statename:"Haryana",stateChecked:false},Himachal:{statename:"Himachal Pradesh",stateChecked:false},JammuandKashmir:{statename:"Jammu and Kashmir",stateChecked:false},Jharkand:{statename:"Jharkhand",stateChecked:false},Karnataka:{statename:"Karnataka",stateChecked:false},Kerala:{statename:"Kerala",stateChecked:false},Lakshadweep:{statename:"Lakshadweep",stateChecked:false},MadhyaPradesh:{statename:"Madhya Pradesh",stateChecked:false},Maharashtra:{statename:"Maharashtra",stateChecked:false},Manipur:{statename:"Manipur",stateChecked:false},Meghalaya:{statename:"Meghalaya",stateChecked:false},Mizoram:{statename:"Mizoram",stateChecked:false},Nagaland:{statename:"Nagaland",stateChecked:false},Odisha:{statename:"Odisha",stateChecked:false},Puducherry:{statename:"Puducherry",stateChecked:false},Punjab:{statename:"Punjab",stateChecked:false},Rajasthan:{statename:"Rajasthan",stateChecked:false},Sikkim:{statename:"Sikkim",stateChecked:false},TamilNadu:{statename:"Tamil Nadu",stateChecked:false},Telangana:{statename:"Telangana",stateChecked:false},Tripura:{statename:"Tripura",stateChecked:false},Uttar:{statename:"Uttar Pradesh",stateChecked:false},Uttarakhand:{statename:"Uttarakhand",stateChecked:false},Bengal:{statename:"West Bengal",stateChecked:false}};
+
 _this.greFlag = {gre:[{scoreRange:290,checked:false},{scoreRange:300,checked:false},{scoreRange:305,checked:false}]};
+
 _this.greFilterInputs = {input1:0,input2:0};
+
 _this.greFilterType = {type:'none'};
+
 console.log("AdminAppSearchService active");
+
+_this.filters = {GRE:{Inputs:{input1:0,input2:0},Type:'none',checked:false},GREQuant:{Inputs:{input1:0,input2:0},Type:'none',checked:false},TOEFL:{Inputs:{input1:0,input2:0},Type:'none',checked:false},ILETS:{Inputs:{input1:0,input2:0},Type:'none',checked:false},undergradGPA:{Inputs:{input1:0,input2:0},Type:'none',checked:false},undergradMajor:{Inputs:{input1:'none'},Type:'none',checked:false},intendedMajor:{Inputs:{input1:'none'},Type:'none',checked:false},undergradCollege:{Inputs:{input1:'none'},Type:'none',checked:false},city:{Inputs:{input1:'none'},Type:'none',checked:false},district:{Inputs:{input1:'none'},Type:'none',checked:false},state:{Inputs:{input1:'none'},Type:'none',checked:false}};
 
 _this.globaldata = [];
 
@@ -389,13 +392,17 @@ _this.checkGREChecked = {};
 return _this;
 })
 
+
+/************************************************************************** FILTER CHAIN STARTS *****************************************************************/
+
+
 .filter('filterGRE', function () {
  
         return function (input,filterInputs,filterType) {
  
 	////////////////////////////////////////////
 	
-		if(filterType.type==='greater than')
+		if(filterType ==='greater than')
 		{
 
 			var greaterthan = [];
@@ -413,7 +420,7 @@ return _this;
 			return greaterthan;
 			
 		}
-		else if(filterType.type==='less than')
+		else if(filterType ==='less than')
 		{
 
 			var lessthan = [];
@@ -431,7 +438,7 @@ return _this;
 			return lessthan;	
 
 		}
-		else if(filterType.type==='equal to')
+		else if(filterType ==='equal to')
 		{
 
 			var equalto = [];
@@ -449,7 +456,7 @@ return _this;
 			return equalto;
 			
 		}
-		else if(filterType.type==='between')
+		else if(filterType ==='between')
 		{
 
 		     var between = [];
@@ -483,6 +490,419 @@ return _this;
         };
     })
 
+
+/************************************************************************** GRE QUANT FILTER *****************************************************************/
+
+
+.filter('filterGREQuant', function () {
+ 
+        return function (input,filterInputs,filterType) {
+ 
+	////////////////////////////////////////////
+	
+		if(filterType ==='greater than')
+		{
+
+			var greaterthan = [];
+        
+			for(var i=0;i<input.length;i++)
+			{
+			    if(filterInputs.input1 < parseInt(input[i].greQuantScore))
+			    {	
+				greaterthan.push(input[i]);
+		
+				//console.log(input[i].greQuantScore);	
+			    } 
+			}
+
+			return greaterthan;
+			
+		}
+		else if(filterType ==='less than')
+		{
+
+			var lessthan = [];
+		
+			for(var i=0;i<input.length;i++)
+			{
+			    if(filterInputs.input1 > parseInt(input[i].greQuantScore))
+			    {	
+				lessthan.push(input[i]);
+		
+				//console.log(input[i].greQuantScore);	
+			    } 
+			}
+			
+			return lessthan;	
+
+		}
+		else if(filterType ==='equal to')
+		{
+
+			var equalto = [];
+		
+			for(var i=0;i<input.length;i++)
+			{
+			    if(filterInputs.input1 == parseInt(input[i].greQuantScore))
+			    {	
+				equalto.push(input[i]);
+		
+				//console.log(input[i].greQuantScore);	
+			    } 
+			}
+			
+			return equalto;
+			
+		}
+		else if(filterType ==='between')
+		{
+
+		     var between = [];
+		
+			for(var i=0;i<input.length;i++)
+			{
+			    if(filterInputs.input1 < parseInt(input[i].greQuantScore) && filterInputs.input2 > parseInt(input[i].greQuantScore))
+			    {	
+				between.push(input[i]);
+		
+				//console.log(input[i].greQuantScore);	
+			    } 
+			}
+			
+			return between;
+
+	
+		}		
+
+
+
+	////////////////////////////////////////////
+
+ 
+	
+							
+							
+						        
+	
+            
+        };
+    })
+
+
+/**************************************** TOEFL FILTER ***************************************************************************/
+
+
+.filter('filterTOEFL', function () {
+ 
+        return function (input,filterInputs,filterType) {
+ 
+	////////////////////////////////////////////
+	
+		if(filterType ==='greater than')
+		{
+
+			var greaterthan = [];
+        
+			for(var i=0;i<input.length;i++)
+			{
+			    if(filterInputs.input1 < parseInt(input[i].toeflScore))
+			    {	
+				greaterthan.push(input[i]);
+		
+				console.log(input[i].toeflScore);	
+			    } 
+			}
+
+			return greaterthan;
+			
+		}
+		else if(filterType ==='less than')
+		{
+
+			var lessthan = [];
+		
+			for(var i=0;i<input.length;i++)
+			{
+			    if(filterInputs.input1 > parseInt(input[i].toeflScore))
+			    {	
+				lessthan.push(input[i]);
+		
+				console.log(input[i].toeflScore);	
+			    } 
+			}
+			
+			return lessthan;	
+
+		}
+		else if(filterType ==='equal to')
+		{
+
+			var equalto = [];
+		
+			for(var i=0;i<input.length;i++)
+			{
+			    if(filterInputs.input1 == parseInt(input[i].toeflScore))
+			    {	
+				equalto.push(input[i]);
+		
+				console.log(input[i].toeflScore);	
+			    } 
+			}
+			
+			return equalto;
+			
+		}
+		else if(filterType ==='between')
+		{
+
+		     var between = [];
+		
+			for(var i=0;i<input.length;i++)
+			{
+			    if(filterInputs.input1 < parseInt(input[i].toeflScore) && filterInputs.input2 > parseInt(input[i].toeflScore))
+			    {	
+				between.push(input[i]);
+		
+				console.log(input[i].toeflScore);	
+			    } 
+			}
+			
+			return between;
+
+	
+		}		
+
+
+
+	////////////////////////////////////////////
+
+ 
+	
+							
+							
+						        
+	
+            
+        };
+    })
+
+
+
+
+
+/*******************************************************************************************************************/
+
+
+
+/**************************************** ILETS FILTER ***************************************************************************/
+
+
+.filter('filterILETS', function () {
+ 
+        return function (input,filterInputs,filterType) {
+ 
+	////////////////////////////////////////////
+	
+		if(filterType ==='greater than')
+		{
+
+			var greaterthan = [];
+        
+			for(var i=0;i<input.length;i++)
+			{
+			    if(filterInputs.input1 < parseFloat(input[i].iletsScore))
+			    {	
+				greaterthan.push(input[i]);
+		
+				console.log(input[i].iletsScore);	
+			    } 
+			}
+
+			return greaterthan;
+			
+		}
+		else if(filterType ==='less than')
+		{
+
+			var lessthan = [];
+		
+			for(var i=0;i<input.length;i++)
+			{
+			    if(filterInputs.input1 > parseFloat(input[i].iletsScore))
+			    {	
+				lessthan.push(input[i]);
+		
+				console.log(input[i].iletsScore);	
+			    } 
+			}
+			
+			return lessthan;	
+
+		}
+		else if(filterType ==='equal to')
+		{
+
+			var equalto = [];
+		
+			for(var i=0;i<input.length;i++)
+			{
+			    if(filterInputs.input1 == parseFloat(input[i].iletsScore))
+			    {	
+				equalto.push(input[i]);
+		
+				console.log(input[i].iletsScore);	
+			    } 
+			}
+			
+			return equalto;
+			
+		}
+		else if(filterType ==='between')
+		{
+
+		     var between = [];
+		
+			for(var i=0;i<input.length;i++)
+			{
+			    if(filterInputs.input1 < parseFloat(input[i].iletsScore) && filterInputs.input2 > parseInt(input[i].iletsScore))
+			    {	
+				between.push(input[i]);
+		
+				console.log(input[i].iletsScore);	
+			    } 
+			}
+			
+			return between;
+
+	
+		}		
+
+
+
+	////////////////////////////////////////////
+
+ 
+	
+							
+							
+						        
+	
+            
+        };
+    })
+
+
+
+
+
+/*******************************************************************************************************************/
+
+
+/**************************************** GPA FILTER ***************************************************************************/
+
+
+.filter('filterGPA', function () {
+ 
+        return function (input,filterInputs,filterType) {
+ 
+	////////////////////////////////////////////
+	
+		if(filterType ==='greater than')
+		{
+
+			var greaterthan = [];
+        
+			for(var i=0;i<input.length;i++)
+			{
+			    if(filterInputs.input1 < parseFloat(input[i].undergradGPA))
+			    {	
+				greaterthan.push(input[i]);
+		
+				console.log(input[i].undergradGPA);	
+			    } 
+			}
+
+			return greaterthan;
+			
+		}
+		else if(filterType ==='less than')
+		{
+
+			var lessthan = [];
+		
+			for(var i=0;i<input.length;i++)
+			{
+			    if(filterInputs.input1 > parseFloat(input[i].undergradGPA))
+			    {	
+				lessthan.push(input[i]);
+		
+				console.log(input[i].undergradGPA);	
+			    } 
+			}
+			
+			return lessthan;	
+
+		}
+		else if(filterType ==='equal to')
+		{
+
+			var equalto = [];
+		
+			for(var i=0;i<input.length;i++)
+			{
+			    if(filterInputs.input1 == parseFloat(input[i].undergradGPA))
+			    {	
+				equalto.push(input[i]);
+		
+				console.log(input[i].undergradGPA);	
+			    } 
+			}
+			
+			return equalto;
+			
+		}
+		else if(filterType ==='between')
+		{
+
+		     var between = [];
+		
+			for(var i=0;i<input.length;i++)
+			{
+			    if(filterInputs.input1 < parseFloat(input[i].undergradGPA) && filterInputs.input2 > parseFloat(input[i].undergradGPA))
+			    {	
+				between.push(input[i]);
+		
+				console.log(input[i].undergradGPA);	
+			    } 
+			}
+			
+			return between;
+
+	
+		}		
+
+
+
+	////////////////////////////////////////////
+
+ 
+	
+							
+							
+						        
+	
+            
+        };
+    })
+
+
+
+
+
+/*******************************************************************************************************************/
+
+
+
 .filter('filterMajor', function () {
  
         return function (majors) {
@@ -512,16 +932,18 @@ return _this;
 
 
 
-.controller('AdminAppSearchCtrl', function ($scope,adminService,$localStorage,$filter,$window,AdminAppSearchService) {
+.controller('AdminAppSearchCtrl', function ($scope,adminService,$localStorage,$filter,$window,AdminAppSearchService,$timeout) {
   
     var first = this;
     
-    first.flags  = AdminAppSearchService.flags;
+    first.states  = AdminAppSearchService.states;
     first.greFlag = AdminAppSearchService.greFlag;
     first.greFilterInputs = AdminAppSearchService.greFilterInputs;
     first.greFilterType = AdminAppSearchService.greFilterType;
+    first.filters = AdminAppSearchService.filters;
+    first.exportOptions = {option:[{column:"GRE Total Score",checked:false},{column:"GRE Quant Score",checked:false},{column:"GRE Verbal Score",checked:false},{column:"GRE AWA Score",checked:false},{column:"Undergrad GPA",checked:false},{column:"TOEFL Total Score",checked:false},{column:"TOEFL Reading Score",checked:false},{column:"TOEFL Writing Score",checked:false},{column:"TOEFL Listening Score",checked:false},{column:"TOEFL Speaking Score",checked:false},{column:"ILETS Total Score",checked:false},{column:"ILETS Reading Score",checked:false},{column:"ILETS Writing Score",checked:false},{column:"ILETS Listening Score",checked:false},{column:"ILETS Speaking Score",checked:false},{column:"Undergrad Major",checked:false},{column:"Intended Major",checked:false},{column:"Semester Intended",checked:false},{column:"Degree Expected",checked:false},{column:"Undergrad College",checked:false},{column:"Undergrad CollegeCity",checked:false},{column:"Undergrad CollegeState",checked:false},{column:"Undergrad CollegeCountry",checked:false},{column:"Email",checked:false},{column:"Phone Number",checked:false},{column:"City",checked:false},{column:"District",checked:false},{column:"State",checked:false},{column:"Country",checked:false}]};
     
-    console.log("In Search CTRL-State checked:"+first.flags.stateData[1].stateChecked);
+   
     
     adminService.listUserDetails($localStorage.admin).success(function (response) {
 		                
@@ -530,7 +952,7 @@ return _this;
                                  
 				if(typeof globaldata[0].firstName != 'undefined')
                                 {
-			           first.flags.globaldata = globaldata;
+			           //first.flags.globaldata = globaldata;
 				   first.globaldata = globaldata;
 				   
                                    $scope.searchList = globaldata;
@@ -572,17 +994,17 @@ return _this;
 		});
 
 /*************************************************************************************************************************************************/
-                               
-	                       $scope.sflag = first.flags.stateData;
+                               $scope.masterOptions = true;
+	                       $scope.states = first.states;
 			       //$scope.globaldata = first.flags.globaldata;
 			       var count = 0;
-			       $scope.$watch('sflag', function(oldValue,newValue) {
+			       $scope.$watch('states', function(oldValue,newValue) {
   				 	
-				       console.log("Execution Count:"+(count = count+1));
 				       $scope.checkstateChecked();
-				      //$scope.check();
+				     
 			       },true);
-
+                               
+                              
 			      /* $scope.greFlag = first.greFlag.gre;
 			       $scope.$watch('greFlag',function(oldValue,newValue) {
   				 	
@@ -598,10 +1020,244 @@ return _this;
 				       $scope.checkGREInputs();
 				      //$scope.check();
 			       },true);
-                               
-			     	
 
-			       
+			      $scope.exportOptions = first.exportOptions;
+			      
+			      $scope.$watch('exportOptions',function(oldValue,newValue) {
+  				 	
+				 var columns = [];
+				 $scope.generateTable(columns);
+				 
+				      
+			       },true);
+
+			      $scope.filters = first.filters;
+                              $scope.$watch('filters',function(oldValue,newValue) {
+  				 	
+				 $scope.filterChain();
+				 
+				      
+			       },true);
+
+
+
+				$scope.generateTable = function(columns){
+
+					var input =  first.exportOptions.option;
+					
+					for(var i=0;i<input.length;i++)
+					{
+
+					     if(first.exportOptions.option[i].checked)
+					     {
+						
+						columns.push(first.exportOptions.option[i].column);
+						
+					     }
+						
+					}
+					
+                                        $scope.columns = columns;
+					//alert("Columns Length:"+columns.length);
+
+
+
+				}
+
+			       $scope.filterChain = function ()
+			       {
+					//alert("GREChecked");
+					var inputTitle="";
+				        var column1Data = "Name";
+				        var column2Data = "GRE Score";
+					
+					var finaldata = [];
+                                        var filtersUsed = [];
+					var filteredsemesterdata; 
+                                        /*if(first.filters.intendedSemster.checked){
+
+                                                 filteredsemesterdata = $filter('filter')(first.globaldata,{semesterIntended:first.filters.intendedSemester.Input});
+						 filtersUsed.push("Semester:"+first.filters.intendedSemester.Input);
+					}else
+					{*/
+						 filteredsemesterdata = first.globaldata;
+						 filtersUsed.push("Semester: All");
+					//}
+
+                                        if(first.filters.GRE.checked)
+					{
+						if(first.filters.GRE.Inputs.input1==0)
+							return;
+						else
+						{
+						
+						
+							filterOUT1 = $filter('filterGRE')(filteredsemesterdata,first.filters.GRE.Inputs,first.filters.GRE.Type);
+							var input2 = 0;
+		                                        if(first.filters.GRE.Inputs.input2!=0)
+							{
+								input2 = first.filters.GRE.Inputs.input2;
+								filtersUsed.push("GRE: "+first.filters.GRE.Type+" "+first.filters.GRE.Inputs.input1+" and "+first.filters.GRE.Inputs.input2);
+							}
+							else 
+							{
+								filtersUsed.push("GRE:"+first.filters.GRE.Type+" "+first.filters.GRE.Inputs.input1);						
+							}
+						        filteredsemesterdata = filterOUT1;
+						}
+	
+					}
+					 if(first.filters.GREQuant.checked)
+					{
+						if(first.filters.GREQuant.Inputs.input1==0)
+							return;
+						else
+						{
+						
+						
+							filterOUT1Q = $filter('filterGREQuant')(filteredsemesterdata,first.filters.GREQuant.Inputs,first.filters.GREQuant.Type);
+							var input2 = 0;
+		                                        if(first.filters.GREQuant.Inputs.input2!=0)
+							{
+								input2 = first.filters.GREQuant.Inputs.input2;
+								filtersUsed.push("GRE Quant Score: "+first.filters.GREQuant.Type+" "+first.filters.GREQuant.Inputs.input1+" and "+first.filters.GREQuant.Inputs.input2);
+							}
+							else 
+							{
+								filtersUsed.push("GRE Quant Score:"+first.filters.GREQuant.Type+" "+first.filters.GREQuant.Inputs.input1);						
+							}
+						        filteredsemesterdata = filterOUT1Q;
+						}
+	
+					}
+					if(first.filters.TOEFL.checked)
+					{
+					        if(first.filters.TOEFL.Inputs.input1==0)
+							return;
+						else
+						{
+							filterOUT2 = $filter('filterTOEFL')(filteredsemesterdata,first.filters.TOEFL.Inputs,first.filters.TOEFL.Type);
+							var input2 = 0;
+		                                        if(first.filters.TOEFL.Inputs.input2!=0)
+							{
+								input2 = first.filters.TOEFL.Inputs.input2;
+								filtersUsed.push("TOEFL: "+first.filters.TOEFL.Type+" "+first.filters.TOEFL.Inputs.input1+" and "+first.filters.TOEFL.Inputs.input2);
+							}
+							else
+							{
+								filtersUsed.push("TOEFL: "+first.filters.TOEFL.Type+" "+first.filters.TOEFL.Inputs.input1);						
+							}
+			
+							filteredsemesterdata = filterOUT2;
+						}
+			
+					}
+					if(first.filters.ILETS.checked)
+					{
+						if(first.filters.ILETS.Inputs.input1==0)
+							return;
+						else
+						{
+							filterOUT3 = $filter('filterILETS')(filteredsemesterdata,first.filters.ILETS.Inputs,first.filters.ILETS.Type);
+							var input2 = 0;
+		                                        if(first.filters.ILETS.Inputs.input2!=0)
+							{
+								input2 = first.filters.ILETS.Inputs.input2;
+								filtersUsed.push("ILETS: "+first.filters.ILETS.Type+" "+first.filters.ILETS.Inputs.input1+" and "+first.filters.ILETS.Inputs.input2);
+							}
+							else
+							{
+								filtersUsed.push("ILETS:"+first.filters.ILETS.Type+" "+first.filters.ILETS.Inputs.input1);						
+							}
+							filteredsemesterdata = filterOUT3;
+						}
+			
+					}
+					if(first.filters.undergradGPA.checked)
+					{
+						alert("Checked");
+					      if(first.filters.undergradGPA.Inputs.input1==0)
+							return;
+					      else
+					      {
+					       filterOUT4 = $filter('filterGPA')(filteredsemesterdata,first.filters.undergradGPA.Inputs,first.filters.undergradGPA.Type);
+						var input2 = 0;
+                                                if(first.filters.undergradGPA.Inputs.input2!=0)
+						{
+							input2 = first.filters.undergradGPA.Inputs.input2;
+					          filtersUsed.push("Undergrad GPA:"+first.filters.undergradGPA.Type+" "+first.filters.undergradGPA.Inputs.input1+" -- "+first.filters.undergradGPA.Inputs.input2);
+						}
+						else
+						{
+						  filtersUsed.push("Undergrad GPA:"+first.filters.undergradGPA.Type+" "+first.filters.undergradGPA.Inputs.input1);						
+						}
+					        filteredsemesterdata = filterOUT4;
+				              }
+                                                 
+					}
+				        if(first.filters.undergradMajor.checked)
+					{
+
+						var filterOUT5 = $filter('filter')(filteredsemesterdata,{undergradMajor:first.filters.undergradMajor.Input.input1});
+						filtersUsed.push("Undergrad Major:"+first.filters.undergradMajor.Input.input1);	
+					        filteredsemesterdata = filterOUT5;
+			
+					}
+					if(first.filters.intendedMajor.checked)
+					{
+
+						var filterOUT6 = $filter('filter')(filteredsemesterdata,{intendedMajor:first.filters.intendedMajor.Input.input1});
+						filtersUsed.push("Intended Major:"+first.filters.intendedMajor.Input.input1);	
+					        filteredsemesterdata = filterOUT6;
+			
+					}
+					if(first.filters.undergradCollege.checked)
+					{
+
+						var filterOUT7 = $filter('filter')(filteredsemesterdata,{undergradCollege:first.filters.undergradCollege.Input.input1});
+						filtersUsed.push("Undergrad College:"+first.filters.undergradCollege.Input.input1);
+					        filteredsemesterdata = filterOUT7;
+			
+					}
+				        if(first.filters.district.checked)
+					{
+
+						var filterOUT8 = $filter('filter')(filteredsemesterdata,{district:first.filters.district.Input.input1});
+						filtersUsed.push("District:"+first.filters.district.Input.input1);
+					        filteredsemesterdata = filterOUT8;
+			
+					}
+					if(first.filters.state.checked)
+					{
+
+						var filterOUT9 = $filter('filter')(filteredsemesterdata,{district:first.filters.state.Input.input1});
+						filtersUsed.push("State:"+first.filters.state.Input.input1);
+					        filteredsemesterdata = filterOUT9;
+			
+					}
+					
+
+
+					
+					 
+					        finaldata = filteredsemesterdata;
+			                        $scope.filteredData = finaldata;
+                                                first.filteredData = finaldata;
+						for(var i=0;i<filtersUsed.length;i++)
+						{
+							inputTitle = inputTitle + filtersUsed[i]+" ";						
+						}
+                                                
+                                                $scope.filteredDataTitle = inputTitle;
+                                                first.filteredDataTitle = inputTitle;
+						return plotChartForFilters(finaldata,column1Data,column2Data,inputTitle);
+					
+
+				  
+					
+					
+				}
+                               
 				
 			       $scope.checkGREInputs = function ()
 			       {
@@ -621,6 +1277,7 @@ return _this;
 					 
 					        finaldata = filterInputs;
 			                        $scope.greData = finaldata;
+                                                first.greData = finaldata;
                                                 (first.greFilterInputs.input2 ==0)?(inputTitle = "GRE Scores "+first.greFilterType.type+" "+first.greFilterInputs.input1):(inputTitle = "GRE Scores "+first.greFilterType.type+" "+first.greFilterInputs.input1+" and "+first.greFilterInputs.input2);
                                                 $scope.greTitle = inputTitle;
                                                 first.greTitle = inputTitle;
@@ -632,15 +1289,68 @@ return _this;
 					
 				}
 
-				$scope.exportGREData = function()
+				/*$scope.exportGREData = function()
 				{
                                         alert("Exporting.....");
 					var blob = new Blob([document.getElementById('greDataBlock').innerHTML], {
        						 type: "application/vnd.ms-excel"
     					});
-   				        saveAs(blob, first.greTitle+".pdf");
+   				        saveAs(blob, first.greTitle+".xls");
                                         
 	
+				};*/
+				
+				$scope.exportFilteredData = function()
+				{
+                                        alert("Exporting Filtered Data.....");
+					var blob = new Blob([document.getElementById('filteredDataBlock').innerHTML], {
+       						 type: "application/vnd.ms-excel"
+    					});
+   				        saveAs(blob, first.filteredDataTitle+".xls");
+                                        
+	
+				};
+
+				$scope.exportDistrictWiseData = function()
+				{
+                                        alert("Exporting District Wise Data.....");
+					var blob = new Blob([document.getElementById('districtWiseDataBlock').innerHTML], {
+       						 type: "application/vnd.ms-excel"
+    					});
+   				        saveAs(blob, "DistrictWiseData.xls");
+                                        
+	
+				};
+			
+				$scope.exportMasterData = function()
+				{
+                                        alert("Exporting Master Table.....");
+					var blob = new Blob([document.getElementById('masterDataBlock').innerHTML], {
+       						 type: "application/vnd.ms-excel"
+    					});
+   				        saveAs(blob, "master.xls");
+                                        
+	
+				};
+
+			        $scope.exportCustomTable = function()
+				{
+                                        alert("Exporting Custom Table.....");
+					var blob = new Blob([document.getElementById('customDataBlock').innerHTML], {
+       						 type: "application/vnd.ms-excel"
+    					});
+   				        saveAs(blob, "customTable.xls");
+                                        
+	
+				};
+		
+				$scope.showCustomTable = function()
+				{
+
+					$scope.customBlock = !$scope.customBlock;
+ 					
+
+
 				};
 	
 	                              
@@ -680,16 +1390,43 @@ return _this;
 
 				}*/
 				
-                                
+                   
 				
-				if(first.flags.stateData[1].stateChecked)
+	  if(first.states.Andhra.stateChecked || first.states.Karnataka.stateChecked || first.states.TamilNadu.stateChecked || first.states.Maharashtra.stateChecked)
 				{
 				        		
 					//alert("StateCheck True"); 
-		                        var inputState = "Andhra Pradesh";
+				        var inputState;
+					if(first.states.Andhra.stateChecked)
+		                        {	
+						inputState = first.states.Andhra.statename;
+						
+					}
+					else if(first.states.Karnataka.stateChecked)
+					{
+						inputState = first.states.Karnataka.statename;
+						
+					}
+					else if(first.states.TamilNadu.stateChecked)
+					{
+						inputState = first.states.TamilNadu.statename;
+						
+					}
+					else if(first.states.Maharashtra.stateChecked)
+					{
+						
+						inputState = first.states.Maharashtra.statename;
+						
+					}
+					else{
+
+						alert("State Not Found");
+
+					}
+
                                         console.log("State:"+inputState);
-					console.log("Data Input:"+first.flags.globaldata);
-				  	filterstatedata = $filter('filter')(first.flags.globaldata,{state:inputState});
+					console.log("Data Input:"+first.globaldata);
+				  	filterstatedata = $filter('filter')(first.globaldata,{state:inputState});
 					
                                        // console.log("filterstatedata length:"+filterstatedata);
 
@@ -741,7 +1478,7 @@ return _this;
 							
 						}
 		                                console.log("datalist length"+datalist.length);
-                                                
+				                $scope.stateData = datalist;
 						first.chartData = datalist;
                                                 //console.log("chart data length:"+first.chartData);
                                                 //console.log("/********************************************************************/");
@@ -749,21 +1486,19 @@ return _this;
 		                               
 					
 						plotChartForInputs(first.districts,counts,column1Data,column2Data,inputTitle);
+                                                
+
+                                   
+				  
+						
 						
                                                 
 
 
 				  }
-				  else
-				  {
-					 datalist.length = 0;
-					 
-					 first.districts = [];
-					 first.chartData = [];
-					 filterstatedata = [];
-				         //plotChartForInputs([],[],"","","");
-				  }
-
+				 
+	
+				                
 				
 
 					
@@ -859,6 +1594,44 @@ return _this;
 				    chart.draw(cdata, options);
 
 			 }
+
+
+
+			function plotChartForFilters(input,column1Data,column2Data,inputTitle)
+			 {
+
+				//alert("In Plotter function");
+				var cdata = new google.visualization.DataTable();
+
+				    cdata.addColumn('string', column1Data);
+				    cdata.addColumn('number', column2Data);
+				      
+				    console.log("X length for GRE Now:"+chartdata.length);
+								    
+				    for (var i = 0; i < input.length ; i++) {
+				       cdata.addRow([input[i].firstName.toUpperCase(), parseInt(input[i].greScore)]);
+				    }
+
+				    var options = {
+					title : inputTitle,
+					//width: '450', 
+					//height: '290',
+				        //pieHole: 0.1,
+                                        //is3D: true
+					//vAxis: {title: "Names"},
+       				        //seriesType: "bars",
+					//series: {5: {type: "line"}}
+                                        //series: {1: {type: "line"}}
+				        //hAxis: {minValue: 80},
+				         orientation: 'horizontal'
+					 
+				    };
+
+				    var chart = new google.visualization.BarChart(document.getElementById('chart-div3'));
+				    chart.draw(cdata, options);
+
+			 }
+
 
 			function plotChartForMajors(input,column1Data,column2Data,inputTitle)
 			 {
