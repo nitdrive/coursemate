@@ -22,7 +22,7 @@ var SchoolMateAdminServiceModule =  angular.module('schoolmate.adminservices', [
 
    adminAPIService.listUserDetails = function(aid) {
    
-       var params = {aid:"ad",semester:"FALL 2015",sessionkey:aid};
+       var params = {aid:aid,semester:"FALL 2015",sessionkey:aid};
     
       return $http.get('http://192.168.0.102:3000/admin/userlist',params);
         

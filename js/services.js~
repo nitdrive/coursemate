@@ -9,7 +9,7 @@ var SchoolMateServiceModule =  angular.module('schoolmate.services', []);
        $rootScope.notify();
        var form = {uname: username, password: pass};
        console.log("In User Login Service with details Uname:"+username+" Pass:"+pass+" form-username:"+form.uname+" and form-password:"+form.password);
-       return $http.post('http://192.168.0.104:3000/user/login',form);
+       return $http.post('http://192.168.0.102:3000/user/login',form);
 
     }
 
@@ -17,7 +17,7 @@ var SchoolMateServiceModule =  angular.module('schoolmate.services', []);
 
      	$rootScope.notify();
     	console.log("In User Register Service with details Uname:"+user_data.uname+" Pass:"+user_data.cpass);
-     	return $http.post('http://192.168.0.104:3000/user/register',user_data);
+     	return $http.post('http://192.168.0.102:3000/user/register',user_data);
     }
 
    userAPIService.listUserDetails = function($scope) {
